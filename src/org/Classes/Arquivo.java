@@ -1,3 +1,5 @@
+package org.Classes;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +16,7 @@ public class Arquivo
 	private static List<Paciente> 	  	 listaPacientes;
 	private static List<Secretaria> 	 listaSecretarias;
 	private static List<Medico> 	  	 listaMedicos;
-	private static List<Especialidade> listaEspecialidades;
+	private static List<Especialidade>   listaEspecialidades;
 	private static List<Consulta> 		 listaConsultas;
 
 
