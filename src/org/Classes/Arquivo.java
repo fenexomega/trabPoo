@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-//Godzila que le todos os arquivos e coloca nas listas.
+// Godzila que faz todo o input e output das listas..
 // Isso aqui é uma coisa que não me da orgulho :P
 public class Arquivo
 {
@@ -22,6 +22,19 @@ public class Arquivo
 	private static List<Consulta_Plano> 		listaConsultasPlano;
 	private static List<Plano_De_Saude>	 		listaPlanos;
 
+	// Método que lê todos os arquivos e coloca nas listas.
+	public static void LerArquivos()
+	{
+		listaAtendentes 			= LerArquivoAtendentes();
+		listaConsultasParticulares  = LerArquivoConsulta_Particulares();
+		listaConsultasPlano 		= LerArquivoConsulta_Planos();
+		listaEspecialidades 		= LerArquivoEspecialidades();
+		listaGerente 				= LerArquivoGerentes();
+		listaMedicos				= LerArquivoMedicos();
+		listaPacientes 				= LerArquivoPacientes();
+		listaUsuarios				= LerArquivoUsuarios();
+	}
+	
 	public static void GravarArquivo()
 	{	
 		try
@@ -88,18 +101,7 @@ public class Arquivo
 		}	
 	}
 	
-	//Godzila que le todos os arquivos e coloca nas listas.
-	public static void LerArquivos()
-	{
-		listaAtendentes 			= LerArquivoAtendentes();
-		listaConsultasParticulares  = LerArquivoConsulta_Particulares();
-		listaConsultasPlano 		= LerArquivoConsulta_Planos();
-		listaEspecialidades 		= LerArquivoEspecialidades();
-		listaGerente 				= LerArquivoGerentes();
-		listaMedicos				= LerArquivoMedicos();
-		listaPacientes 				= LerArquivoPacientes();
-		listaUsuarios				= LerArquivoUsuarios();
-	}
+
 	
 	private static ArrayList<Atendente> LerArquivoAtendentes()
 	{
