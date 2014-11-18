@@ -8,19 +8,20 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//Godzila que le todos os arquivos e coloca nas listas.
+// Isso aqui é uma coisa que não me da orgulho :P
 public class Arquivo
 {
-	private static List<Gerente> 	  	 listaGerente;
-	private static List<Usuario> 	 	 listaUsuarios;
-	private static List<Paciente> 	  	 listaPacientes;
-	private static List<Secretaria> 	 listaSecretarias;
-	private static List<Medico> 	  	 listaMedicos;
-	private static List<Especialidade>   listaEspecialidades;
-	private static List<Consulta> 		 listaConsultas;
+	private static List<Gerente> 	  	 		listaGerente;
+	private static List<Usuario> 	 	 		listaUsuarios;
+	private static List<Paciente> 	  	 		listaPacientes;
+	private static List<Atendente> 	 	 		listaAtendentes;
+	private static List<Medico> 	  	 		listaMedicos;
+	private static List<Especialidade>   		listaEspecialidades;
+	private static List<Consulta_Particular> 	listaConsultasParticulares;
+	private static List<Consulta_Plano> 		listaConsultasPlano;
+	private static List<Plano_De_Saude>	 		listaPlanos;
 
-
-	
 	public static void GravarArquivo()
 	{	
 		try
@@ -32,10 +33,53 @@ public class Arquivo
 			f_out.close();
 			
 			f_out = new FileOutputStream("usuarios.ser");
-			 o_out = new ObjectOutputStream(f_out);
+			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaUsuarios);
 			o_out.close();
 			f_out.close();
+			
+			f_out = new FileOutputStream("pacientes.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaPacientes);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("atendentes.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaAtendentes);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("medicos.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaMedicos);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("especialidades.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaEspecialidades);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("consultaparticular.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaConsultasParticulares);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("consultaplano.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaConsultasParticulares);
+			o_out.close();
+			f_out.close();
+			
+			f_out = new FileOutputStream("planos.ser");
+			o_out = new ObjectOutputStream(f_out);
+			o_out.writeObject(listaPlanos);
+			o_out.close();
+			f_out.close();
+			
 
 		} catch (IOException e)
 		{
@@ -44,54 +88,256 @@ public class Arquivo
 		}	
 	}
 	
-	public static boolean LerArquivos()
+	//Godzila que le todos os arquivos e coloca nas listas.
+	public static void LerArquivos()
 	{
-		
+		listaAtendentes 			= LerArquivoAtendentes();
+		listaConsultasParticulares  = LerArquivoConsulta_Particulares();
+		listaConsultasPlano 		= LerArquivoConsulta_Planos();
+		listaEspecialidades 		= LerArquivoEspecialidades();
+		listaGerente 				= LerArquivoGerentes();
+		listaMedicos				= LerArquivoMedicos();
+		listaPacientes 				= LerArquivoPacientes();
+		listaUsuarios				= LerArquivoUsuarios();
 	}
 	
-	public static ArrayList<Curso> LerArquivoCursos()
+	private static ArrayList<Atendente> LerArquivoAtendentes()
 	{
-		ArrayList<Curso> cursos = null;
+		ArrayList<Atendente> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("cursos.ser");
+			FileInputStream f_In = new FileInputStream("atendentes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			cursos = (ArrayList<Curso>) o_In.readObject();
+			lista = (ArrayList<Atendente>) o_In.readObject();
 			o_In.close();
 			f_In.close();
-			return cursos;
 
 		} catch (IOException | ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
+			lista = new ArrayList<>();
 		}
-		return cursos;	
-		
+		return lista;	
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static ArrayList<Aluno> LerArquivoAlunos()
+	private static ArrayList<Consulta_Particular> LerArquivoConsulta_Particulares()
 	{
-		ArrayList<Aluno> alunos = null;
+		ArrayList<Consulta_Particular> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("alunos.ser");
+			FileInputStream f_In = new FileInputStream("consulta_Particulares.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			alunos = (ArrayList<Aluno>) o_In.readObject();
+			lista = (ArrayList<Consulta_Particular>) o_In.readObject();
 			o_In.close();
 			f_In.close();
-			System.out.println(alunos.size());
-			return alunos;
 
 		} catch (IOException | ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
+			lista = new ArrayList<>();
 		}
-		return alunos;
+		return lista;	
+	}
+	
+	private static ArrayList<Consulta_Plano> LerArquivoConsulta_Planos()
+	{
+		ArrayList<Consulta_Plano> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("consulta_Planos.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Consulta_Plano>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Especialidade> LerArquivoEspecialidades()
+	{
+		ArrayList<Especialidade> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("especialidades.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Especialidade>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Gerente> LerArquivoGerentes()
+	{
+		ArrayList<Gerente> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("gerentes.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Gerente>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Medico> LerArquivoMedicos()
+	{
+		ArrayList<Medico> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("medicos.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Medico>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Paciente> LerArquivoPacientes()
+	{
+		ArrayList<Paciente> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("pacientes.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Paciente>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Plano_De_Saude> LerArquivoPlano_De_Saudes()
+	{
+		ArrayList<Plano_De_Saude> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("plano_De_Saudes.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Plano_De_Saude>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+	
+	private static ArrayList<Usuario> LerArquivoUsuarios()
+	{
+		ArrayList<Usuario> lista = null;
+		try
+		{
+			FileInputStream f_In = new FileInputStream("usuarios.ser");
+			ObjectInputStream o_In = new ObjectInputStream(f_In);
+			lista = (ArrayList<Usuario>) o_In.readObject();
+			o_In.close();
+			f_In.close();
+
+		} catch (IOException | ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println("Erro");
+			e.printStackTrace();
+			lista = new ArrayList<>();
+		}
+		return lista;	
+	}
+
+	public static List<Gerente> getListaGerente()
+	{
+		return listaGerente;
+	}
+
+	public static List<Usuario> getListaUsuarios()
+	{
+		return listaUsuarios;
+	}
+
+	public static List<Paciente> getListaPacientes()
+	{
+		return listaPacientes;
+	}
+
+	public static List<Atendente> getListaAtendentes()
+	{
+		return listaAtendentes;
+	}
+
+	public static List<Medico> getListaMedicos()
+	{
+		return listaMedicos;
+	}
+
+	public static List<Especialidade> getListaEspecialidades()
+	{
+		return listaEspecialidades;
+	}
+
+	public static List<Consulta_Particular> getListaConsultasParticulares()
+	{
+		return listaConsultasParticulares;
+	}
+
+	public static List<Consulta_Plano> getListaConsultasPlano()
+	{
+		return listaConsultasPlano;
+	}
+
+	public static List<Plano_De_Saude> getListaPlanos()
+	{
+		return listaPlanos;
+	}
+
+	public static void setListaGerente(List<Gerente> listaGerente)
+	{
+		Arquivo.listaGerente = listaGerente;
 	}
 	
 }
@@ -100,29 +346,15 @@ class ArquivoTest
 {
 	public static void main(String[] args)
 	{
-		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-		ArrayList<Curso> cursos = new ArrayList<Curso>();
-
-		alunos = Arquivo.LerArquivoAlunos();
-		cursos = Arquivo.LerArquivoCursos();
-				
+		 
+		//Test Drive
+		List<Gerente> listaGerente = new ArrayList<Gerente>();
+		Arquivo.setListaGerente(listaGerente);
+		listaGerente.add(new Gerente());
+		Arquivo.GravarArquivo();
 		
-	
-		System.out.println(cursos.size());
-
-		
-		alunos.get(0).adicionarCurso(cursos.get(0));
-		alunos.get(1).adicionarCurso(cursos.get(0));
-		alunos.get(2).adicionarCurso(cursos.get(0));
-		alunos.get(3).adicionarCurso(cursos.get(0));
-
-		
-		
-		Arquivo.GravarArquivo(alunos, cursos);
-		
-		
-		for(Aluno al: cursos.get(0).getAlunos())
-			System.out.println(al.getNome());
+		Arquivo.LerArquivos();
+		System.out.println(Arquivo.getListaGerente().size());
 		
 	}
 }

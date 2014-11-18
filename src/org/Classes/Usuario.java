@@ -1,6 +1,8 @@
 package org.Classes;
 
-public class Usuario 
+import java.io.Serializable;
+
+public class Usuario implements Serializable
 {
 	private String login;
 	private String password;
@@ -9,6 +11,16 @@ public class Usuario
 	private Usuario()
 	{
 		
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(!(obj instanceof Usuario))
+			return false;
+		if(((Usuario) obj).login == login)
+			return true;
+		
+		return false;
 	}
 	
 	public Usuario(String login, String password)
