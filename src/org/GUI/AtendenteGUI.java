@@ -1,6 +1,5 @@
 package org.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
@@ -29,9 +27,12 @@ import java.awt.SystemColor;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import org.Classes.Arquivo;
+import org.Classes.Paciente;
+
 import java.awt.Label;
 import java.awt.Font;
-import java.awt.Panel;
 
 public class AtendenteGUI extends JFrame {
 
@@ -53,6 +54,25 @@ public class AtendenteGUI extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private String[][] getTabelaPacientes()
+	{
+		//TODO TIRAR ESSA LINHA AQUI NO RELEASE
+		Arquivo.LerArquivos();
+		//FIM
+		String[][] listaStrings = new String[Arquivo.getListaPacientes().size()][3];
+		int i = 0;
+		for (Paciente p : Arquivo.getListaPacientes())
+		{
+
+			listaStrings[i][0] = p.getNome();
+			listaStrings[i][1] = p.getCpf();
+			listaStrings[i++][2] = p.getEndereco();
+
+			
+		}
+		return listaStrings;
 	}
 
 	/**
@@ -86,6 +106,11 @@ public class AtendenteGUI extends JFrame {
 		panel.setLayout(null);
 		
 		JButton button_3 = new JButton("");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(table.getModel().getValueAt(table.getSelectedRow(), 1));
+			}
+		});
 		button_3.setBackground(SystemColor.desktop);
 		button_3.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/nova_consulta-01.png")));
 		button_3.setBounds(696, 291, 185, 109);
@@ -99,6 +124,11 @@ public class AtendenteGUI extends JFrame {
 		panel.add(btnNewButton);
 		
 		JButton button_2 = new JButton("");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_2.setBackground(SystemColor.desktop);
 		button_2.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/sair-01.png")));
 		button_2.setBounds(780, 77, 89, 82);
@@ -144,11 +174,9 @@ public class AtendenteGUI extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		table.setModel(new DefaultTableModel (
 				
-				new Object[][]{
-						
-				},
+				getTabelaPacientes(),
 				new String[] {
-						"Nome", "Especialidade", "localidade"
+						"Nome", "CPF", "Localidade"
 				}	
 		));
 		

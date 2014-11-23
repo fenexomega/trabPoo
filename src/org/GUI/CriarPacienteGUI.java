@@ -91,7 +91,7 @@ public class CriarPacienteGUI extends JDialog
 					public void actionPerformed(ActionEvent arg0) {
 						Paciente p = new Paciente();
 						p.setNome(txtNome.getText());
-						p.setCpf(Long.parseLong(txtCpf.getText()));
+						p.setCpf(txtCpf.getText());
 						p.setEndereco(txtEndereo.getText());
 						
 						Arquivo.LerArquivos();

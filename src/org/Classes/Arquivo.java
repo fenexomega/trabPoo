@@ -129,7 +129,7 @@ public class Arquivo
 		ArrayList<Consulta_Particular> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("consulta_Particulares.ser");
+			FileInputStream f_In = new FileInputStream("consultaparticular.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Consulta_Particular>) o_In.readObject();
 			o_In.close();
@@ -150,7 +150,7 @@ public class Arquivo
 		ArrayList<Consulta_Plano> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("consulta_Planos.ser");
+			FileInputStream f_In = new FileInputStream("consultaplano.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Consulta_Plano>) o_In.readObject();
 			o_In.close();
