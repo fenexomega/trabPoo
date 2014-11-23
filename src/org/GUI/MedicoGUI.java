@@ -1,32 +1,27 @@
 package org.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import java.awt.Color;
-import java.awt.SystemColor;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.FlowLayout;
-
-import javax.swing.JTabbedPane;
-import javax.swing.JTextPane;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import org.Classes.Arquivo;
+import org.Classes.Paciente;
 
 public class MedicoGUI extends JFrame {
 
@@ -50,6 +45,24 @@ public class MedicoGUI extends JFrame {
 		});
 	}
 
+	private String[][] getTabelaPacientes()
+	{
+		//TODO TIRAR ESSA LINHA AQUI NO RELEASE
+		Arquivo.LerArquivos();
+		//FIM
+		String[][] listaStrings = new String[Arquivo.getListaPacientes().size()][2];
+		int i = 0;
+		for (Paciente p : Arquivo.getListaPacientes())
+		{
+
+			listaStrings[i][0] = p.getNome();
+			listaStrings[i++][1] = p.getCpf();
+
+			
+		}
+		return listaStrings;
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -108,13 +121,12 @@ public class MedicoGUI extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+	
 		table.setModel(new DefaultTableModel (
 				
-				new Object[][]{
-						
-				},
+				getTabelaPacientes(),
 				new String[] {
-						"Nome", "Cidade"
+						"Nome", "CPF"
 				}	
 		));
 		
