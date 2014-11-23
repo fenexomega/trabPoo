@@ -18,7 +18,7 @@ public class MainGUI {
 
 	private JFrame frame;
 	private JMenuBar menuBar;
-	//private LoginGUI login;
+	private LoginGUI login;
 	private static MainGUI _instance;
 	/**
 	 * Launch the application.
@@ -30,9 +30,9 @@ public class MainGUI {
 					
 					MainGUI window = MainGUI.getInstance();
 					window.frame.setVisible(true);
-//					window.login = new LoginGUI();
-//					window.login.setVisible(true);
-//					
+					window.login = new LoginGUI();
+					window.login.setVisible(true);
+					
 					
 					
 				} catch (Exception e) {
@@ -53,6 +53,9 @@ public class MainGUI {
 		return _instance;
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	private MainGUI() {
 		initialize();
 
@@ -65,11 +68,10 @@ public class MainGUI {
 	
 	/**
 	 * Initialize the contents of the frame.
-	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
-		frame = new JFrame("Sistema Clínica");
-		frame.setBounds(100, 100, 1024, 768);
+		frame = new JFrame();
+		frame.setBounds(100, 100, 728, 424);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		menuBar = new JMenuBar();
@@ -94,11 +96,6 @@ public class MainGUI {
 		mnArquivo.add(mntmLogout);
 		
 		JMenuItem mntmFechar = new JMenuItem("Fechar");
-		mntmFechar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Dispose();
-			}
-		});
 		mnArquivo.add(mntmFechar);
 		
 		JMenu mnExibir = new JMenu("Exibir");

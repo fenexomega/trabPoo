@@ -7,6 +7,9 @@ public class Usuario implements Serializable
 	private String login;
 	private String password;
 	
+	private static final long serialVersionUID = 1L;
+
+	
 	@SuppressWarnings("unused")
 	private Usuario()
 	{
