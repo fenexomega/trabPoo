@@ -25,6 +25,7 @@ public class Arquivo
 	// Método que lê todos os arquivos e coloca nas listas.
 	public static void LerArquivos()
 	{
+		System.out.println("Lendo Arquivos");
 		listaAtendentes 			= LerArquivoAtendentes();
 		listaConsultasParticulares  = LerArquivoConsulta_Particulares();
 		listaConsultasPlano 		= LerArquivoConsulta_Planos();
@@ -39,6 +40,7 @@ public class Arquivo
 	{	
 		try
 		{
+			System.out.println("Gravando dados");
 			FileOutputStream f_out = new FileOutputStream("gerentes.ser");
 			ObjectOutputStream o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaGerente);

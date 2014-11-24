@@ -34,14 +34,16 @@ import org.Classes.Paciente;
 
 import java.awt.Label;
 import java.awt.Font;
-
+//SINGLETON
 public class AtendenteGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
 	private String[][] listaStringsPacientes;
-
+	private CriarPacienteGUI cp;
+	static private AtendenteGUI _instance;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +51,7 @@ public class AtendenteGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AtendenteGUI frame = new AtendenteGUI();
+					AtendenteGUI frame = GetInstance();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,29 +60,43 @@ public class AtendenteGUI extends JFrame {
 		});
 	}
 	
-	private String[][] getTabelaPacientes()
+	public void AtualizarTabelaPacientes()
 	{
 		//TODO TIRAR ESSA LINHA AQUI NO RELEASE
 		Arquivo.LerArquivos();
 		//FIM
-		String[][] listaStrings = new String[Arquivo.getListaPacientes().size()][3];
+		listaStringsPacientes = new String[Arquivo.getListaPacientes().size()][3];
 		int i = 0;
 		for (Paciente p : Arquivo.getListaPacientes())
 		{
 
-			listaStrings[i][0] = p.getNome();
-			listaStrings[i][1] = p.getCpf();
-			listaStrings[i++][2] = p.getEndereco();
+			listaStringsPacientes[i][0] = p.getNome();
+			listaStringsPacientes[i][1] = p.getCpf();
+			listaStringsPacientes[i++][2] = p.getEndereco();
 
 			
 		}
-		return listaStrings;
+		table.setModel(new DefaultTableModel (
+				
+				listaStringsPacientes,
+				new String[] {
+						"Nome", "CPF", "Localidade"
+				}	
+		));
 	}
 
+	static public AtendenteGUI GetInstance()
+	{
+		if(_instance == null)
+		{
+			_instance = new AtendenteGUI();
+		}
+		return _instance;
+	}
 	/**
 	 * Create the frame.
 	 */
-	public AtendenteGUI() {
+	private AtendenteGUI() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AtendenteGUI.class.getResource("/Images/logo-01.png")));
 		setLocationRelativeTo(null);
@@ -125,6 +141,12 @@ public class AtendenteGUI extends JFrame {
 		panel.add(button_3);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CadastrarMedicoGUI cm = new CadastrarMedicoGUI();
+				cm.setVisible(true);
+			}
+		});
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(SystemColor.desktop);
 		btnNewButton.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/cadastrar_medico-01.png")));
@@ -145,6 +167,8 @@ public class AtendenteGUI extends JFrame {
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cp = new CriarPacienteGUI();
+				cp.show();
 				
 			}
 		});
@@ -184,15 +208,8 @@ public class AtendenteGUI extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		listaStringsPacientes = getTabelaPacientes();
 		contentPane.setLayout(gl_contentPane);
-		table.setModel(new DefaultTableModel (
-				
-				listaStringsPacientes,
-				new String[] {
-						"Nome", "CPF", "Localidade"
-				}	
-		));
+		AtualizarTabelaPacientes();
 		
 		Label label = new Label("Somente para n\u00EDvel gerencial");
 		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));

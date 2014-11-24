@@ -1,24 +1,26 @@
 package org.GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginGUI extends JDialog
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.Classes.Usuario;
+import org.Processos.Logador;
+
+public class LoginGUI extends JFrame
 {
 
 	private final JPanel contentPanel = new JPanel();
@@ -54,7 +56,6 @@ public class LoginGUI extends JDialog
 		contentPanel.setLayout(null);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 
-		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		
 		JLabel lblLogin = new JLabel("Usu\u00E1rio: ");
 		lblLogin.setFont(new Font("Constantia", Font.BOLD, 16));
@@ -84,6 +85,24 @@ public class LoginGUI extends JDialog
 			okButton.setBackground(new Color(0, 139, 139));
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					
+					String login = txtUsername.getText();
+					char[] cpassword = pwdApass.getPassword();
+					String password = new String(cpassword);
+
+					if(login.isEmpty() || password.isEmpty())
+					{
+						JOptionPane.showMessageDialog(getContentPane(), "Preencha o formulário.");
+						return;
+					}
+					Usuario u = new Usuario(login, password);
+					if(Logador.UsuarioValido(u) == Logador.STATUS.NAO_VALIDO)
+						JOptionPane.showMessageDialog(getContentPane(), "Login Inválido.");
+					else if(Logador.UsuarioValido(u) == Logador.STATUS.SENHA_INCORRETA)
+						JOptionPane.showMessageDialog(getContentPane(), "Senha incorreta.");
+					
+
+
 				}
 			});
 			okButton.setBounds(360, 319, 84, 44);
@@ -99,9 +118,8 @@ public class LoginGUI extends JDialog
 			contentPanel.add(cancelButton);
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					MainGUI gui = MainGUI.getInstance();
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
 					dispose();
-					gui.Dispose();
 				}
 			});
 			cancelButton.setActionCommand("Cancel");

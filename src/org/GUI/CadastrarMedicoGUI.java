@@ -1,23 +1,23 @@
 package org.GUI;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.JButton;
 import java.awt.SystemColor;
-import javax.swing.JCheckBox;
 
-public class CadastrarMedicoGUI extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+
+public class CadastrarMedicoGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -46,7 +46,8 @@ public class CadastrarMedicoGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarMedicoGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 533, 621);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

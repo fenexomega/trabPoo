@@ -10,13 +10,16 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.Classes.Arquivo;
 import org.Classes.Paciente;
+
 import javax.swing.ImageIcon;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -37,7 +40,6 @@ public class CriarPacienteGUI extends JDialog
 		try
 		{
 			CriarPacienteGUI dialog = new CriarPacienteGUI();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e)
 		{
@@ -54,6 +56,8 @@ public class CriarPacienteGUI extends JDialog
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 		contentPanel.setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
@@ -116,12 +120,50 @@ public class CriarPacienteGUI extends JDialog
 		panel.add(label);
 		
 		JButton button = new JButton("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Paciente p = new Paciente();
+				List<Paciente> listaPacientes = Arquivo.getListaPacientes();
+				p.setCpf(txtCpf.getText());
+				for (Paciente paciente : listaPacientes)
+				{
+					if(paciente.equals(p))
+					{
+						JOptionPane.showMessageDialog(getContentPane(), "CPF já cadastrado.");
+						return;
+
+					}
+					
+				}
+		
+
+				p.setNome(txtNome.getText());
+				p.setEndereco(txtEndereo.getText());
+				
+				listaPacientes.add(p);
+				
+				Arquivo.GravarArquivo();
+				
+				JOptionPane.showMessageDialog(getContentPane(), "Paciente cadastrado com sucesso");
+				
+
+				AtendenteGUI.GetInstance().AtualizarTabelaPacientes();
+				
+				dispose();
+				
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
 		button.setBounds(114, 340, 144, 43);
 		contentPanel.add(button);
 		
 		JButton button_1 = new JButton("Cancelar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
 		button_1.setBounds(287, 340, 144, 43);
