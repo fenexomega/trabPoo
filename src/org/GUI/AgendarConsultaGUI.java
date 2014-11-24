@@ -15,6 +15,8 @@ import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import java.awt.TextField;
 import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AgendarConsultaGUI extends JFrame {
 
@@ -40,7 +42,7 @@ public class AgendarConsultaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AgendarConsultaGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 792, 515);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,9 +103,9 @@ public class AgendarConsultaGUI extends JFrame {
 		lblHora.setBounds(166, 119, 55, 29);
 		panel_1.add(lblHora);
 		
-		JButton btnVetificarCpf = new JButton("Vetificar CPF");
-		btnVetificarCpf.setBounds(464, 9, 134, 23);
-		panel_1.add(btnVetificarCpf);
+		JButton btnVerificarCpf = new JButton("Verificar CPF");
+		btnVerificarCpf.setBounds(464, 9, 134, 23);
+		panel_1.add(btnVerificarCpf);
 		
 		JLabel lblMdicos = new JLabel("M\u00E9dicos");
 		lblMdicos.setBounds(10, 53, 217, 29);
@@ -136,6 +138,11 @@ public class AgendarConsultaGUI extends JFrame {
 		panel_1.add(button_1);
 		
 		JButton button_2 = new JButton("Cancelar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_2.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/cancelar-01.png")));
 		button_2.setForeground(Color.WHITE);
 		button_2.setBackground(new Color(0, 128, 128));

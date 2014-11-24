@@ -3,6 +3,7 @@ package org.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +40,7 @@ public class AtendenteGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
+	private String[][] listaStringsPacientes;
 
 	/**
 	 * Launch the application.
@@ -108,7 +110,13 @@ public class AtendenteGUI extends JFrame {
 		JButton button_3 = new JButton("");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(table.getModel().getValueAt(table.getSelectedRow(), 1));
+				if(table.getSelectedRow() == -1)
+				{
+					//GERAR ERRO, nenhuma linha foi selecionada
+					JOptionPane.showMessageDialog(contentPane, "Nenhuma linha foi selecionada");
+				}
+				else
+					JOptionPane.showMessageDialog(contentPane,table.getModel().getValueAt(table.getSelectedRow(), 1));
 			}
 		});
 		button_3.setBackground(SystemColor.desktop);
@@ -135,6 +143,11 @@ public class AtendenteGUI extends JFrame {
 		panel.add(button_2);
 		
 		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		button_1.setBackground(SystemColor.desktop);
 		button_1.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/cadastrar_paciente.png")));
 		button_1.setBounds(619, 61, 107, 109);
@@ -171,10 +184,11 @@ public class AtendenteGUI extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		listaStringsPacientes = getTabelaPacientes();
 		contentPane.setLayout(gl_contentPane);
 		table.setModel(new DefaultTableModel (
 				
-				getTabelaPacientes(),
+				listaStringsPacientes,
 				new String[] {
 						"Nome", "CPF", "Localidade"
 				}	

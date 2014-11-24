@@ -101,7 +101,7 @@ public class CriarPacienteGUI extends JDialog
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(CriarPacienteGUI.class.getResource("/Images/adicionar-01.png")));
-		label_1.setBounds(249, 43, 20, 35);
+		label_1.setBounds(281, 43, 20, 35);
 		panel.add(label_1);
 		
 		JLabel lblCadastroDePaciente = new JLabel("Cadastro de Paciente");
