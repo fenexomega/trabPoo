@@ -30,20 +30,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import org.Classes.Arquivo;
+import org.Classes.Medico;
 import org.Classes.Paciente;
 import org.GUI.util.ErrorGUI;
 
 import java.awt.Label;
 import java.awt.Font;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 //SINGLETON
 public class AtendenteGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTable table;
 	private String[][] listaStringsPacientes;
+	private String[][] listaStringsMedicos;
 	private CriarPacienteGUI cp;
 	static private AtendenteGUI _instance;
+	private JTable tab_paciente;
+	private JTable tab_medico;
 	
 	/**
 	 * Launch the application.
@@ -60,30 +66,36 @@ public class AtendenteGUI extends JFrame {
 			}
 		});
 	}
-	
+	public void AtualizarTabelaMedicos(){
+		Arquivo.LerArquivos();
+		listaStringsMedicos = new String[Arquivo.getListaMedicos().size()][4];
+		
+		int i = 0;
+		for (Medico p : Arquivo.getListaMedicos())
+		{
+
+			listaStringsMedicos[i][0] = p.getNome();
+			listaStringsMedicos[i][2] = p.getCRM();
+			listaStringsMedicos[i++][3] = p.getHorario();
+		}
+		
+	}
 	public void AtualizarTabelaPacientes()
 	{
 		//TODO TIRAR ESSA LINHA AQUI NO RELEASE
 		Arquivo.LerArquivos();
 		//FIM
 		listaStringsPacientes = new String[Arquivo.getListaPacientes().size()][3];
+		
 		int i = 0;
 		for (Paciente p : Arquivo.getListaPacientes())
 		{
 
 			listaStringsPacientes[i][0] = p.getNome();
 			listaStringsPacientes[i][1] = p.getCpf();
-			listaStringsPacientes[i++][2] = p.getEndereco();
-
-			
+			listaStringsPacientes[i++][2] = p.getEndereco();	
 		}
-		table.setModel(new DefaultTableModel (
-				
-				listaStringsPacientes,
-				new String[] {
-						"Nome", "CPF", "Localidade"
-				}	
-		));
+		
 	}
 
 	static public AtendenteGUI GetInstance()
@@ -127,18 +139,18 @@ public class AtendenteGUI extends JFrame {
 		JButton button_3 = new JButton("");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(table.getSelectedRow() == -1)
+				if(tab_paciente.getSelectedRow() == -1)
 				{
 					//GERAR ERRO, nenhuma linha foi selecionada
 					ErrorGUI.MostrarErro(contentPane, "Nenhuma linha foi selecionada");
 				}
 				else
-					ErrorGUI.MostrarErro(contentPane,table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
+					ErrorGUI.MostrarErro(contentPane,tab_paciente.getModel().getValueAt(tab_paciente.getSelectedRow(), 1).toString());
 			}
 		});
 		button_3.setBackground(SystemColor.desktop);
 		button_3.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/nova_consulta-01.png")));
-		button_3.setBounds(696, 291, 185, 109);
+		button_3.setBounds(696, 261, 185, 109);
 		panel.add(button_3);
 		
 		JButton btnNewButton = new JButton("");
@@ -178,20 +190,6 @@ public class AtendenteGUI extends JFrame {
 		button_1.setBounds(619, 61, 107, 109);
 		panel.add(button_1);
 		
-		textField = new JTextField();
-		textField.setBounds(124, 230, 398, 27);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton button = new JButton("");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		button.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/pesquisa-01.png")));
-		button.setBounds(526, 230, 40, 27);
-		panel.add(button);
-		
 		JLabel lblJlabel = new JLabel("");
 		lblJlabel.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/logo-01.png")));
 		lblJlabel.setForeground(Color.WHITE);
@@ -199,33 +197,53 @@ public class AtendenteGUI extends JFrame {
 		panel.add(lblJlabel);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 893, 280);
+		lblNewLabel.setBounds(0, 0, 893, 231);
 		lblNewLabel.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/inicial_background.png")));
 		panel.add(lblNewLabel);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 293, 676, 384);
-		panel.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 		AtualizarTabelaPacientes();
 		
-		Label label = new Label("Somente para n\u00EDvel gerencial");
-		label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
-		label.setBounds(707, 453, 174, 27);
-		panel.add(label);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 242, 676, 420);
+		panel.add(tabbedPane);
 		
-		JButton button_4 = new JButton("");
-		button_4.setBackground(SystemColor.desktop);
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		button_4.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/seach-01.png")));
-		button_4.setBounds(696, 483, 185, 109);
-		panel.add(button_4);
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Pacientes", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 11, 651, 370);
+		panel_1.add(scrollPane_1);
+		
+		tab_paciente = new JTable();
+		scrollPane_1.setViewportView(tab_paciente);
+		
+		tab_paciente.setModel(new DefaultTableModel (
+				
+				listaStringsPacientes,
+				new String[] {
+						"Nome", "CPF", "Endere�o"
+				}	
+		));
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("M�dicos", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(10, 11, 651, 370);
+		panel_2.add(scrollPane_2);
+		
+		tab_medico = new JTable();
+		scrollPane_2.setViewportView(tab_medico);
+		
+		tab_medico.setModel(new DefaultTableModel (
+				
+				listaStringsMedicos,
+				new String[] {
+						"Nome", "CRM", "Horario"
+				}	
+		));
 			
 	}
 }

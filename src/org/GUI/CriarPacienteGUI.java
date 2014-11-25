@@ -94,11 +94,6 @@ public class CriarPacienteGUI extends JDialog
 		contentPanel.add(txtEndereo);
 		txtEndereo.setColumns(10);
 		
-		txtTelefone = new JTextField();
-		txtTelefone.setBounds(114, 274, 320, 29);
-		txtTelefone.setColumns(10);
-		contentPanel.add(txtTelefone);
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 449, 109);
 		contentPanel.add(panel);
@@ -128,7 +123,6 @@ public class CriarPacienteGUI extends JDialog
 				p.setCpf(txtCpf.getText());
 				p.setNome(txtNome.getText());
 				p.setEndereco(txtEndereo.getText());
-				p.setTelefone(txtTelefone.getText());
 				
 				if(txtNome.getText().isEmpty() || txtEndereo.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCpf.getText().isEmpty())
 				{
@@ -154,7 +148,7 @@ public class CriarPacienteGUI extends JDialog
 		});
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
-		button.setBounds(114, 340, 144, 43);
+		button.setBounds(114, 315, 144, 43);
 		contentPanel.add(button);
 		
 		JButton button_1 = new JButton("Cancelar");
@@ -165,14 +159,8 @@ public class CriarPacienteGUI extends JDialog
 		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
-		button_1.setBounds(287, 340, 144, 43);
+		button_1.setBounds(287, 315, 144, 43);
 		contentPanel.add(button_1);
-		
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setForeground(Color.GRAY);
-		lblTelefone.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblTelefone.setBounds(10, 278, 99, 16);
-		contentPanel.add(lblTelefone);
 		setTitle("Criar Paciente");
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 	}

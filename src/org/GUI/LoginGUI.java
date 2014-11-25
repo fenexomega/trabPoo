@@ -49,6 +49,7 @@ public class LoginGUI extends JFrame
 
 	
 	/**
+	 * 
 	 * Create the dialog.
 	 */
 	public LoginGUI()
