@@ -77,7 +77,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		
 		txtEndereco = new JTextField();
 
-		txtEndereco.setBounds(148, 255, 349, 29);
+		txtEndereco.setBounds(148, 294, 349, 29);
 		panel.add(txtEndereco);
 		txtEndereco.setColumns(10);
 		
@@ -88,13 +88,13 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEndereo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
 		JLabel lblComplemento = new JLabel("Telefone:");
-		lblComplemento.setBounds(19, 244, 119, 14);
+		lblComplemento.setBounds(19, 260, 119, 14);
 		panel.add(lblComplemento);
 		lblComplemento.setForeground(new Color(102, 102, 102));
 		lblComplemento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
 		txtTelefone = new JTextField();
-		txtTelefone.setBounds(148, 238, 349, 29);
+		txtTelefone.setBounds(148, 254, 349, 29);
 		panel.add(txtTelefone);
 		txtTelefone.setColumns(10);
 		
@@ -123,7 +123,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		JLabel lblTelefone = new JLabel("Endere\u00E7o:");
 		lblTelefone.setForeground(new Color(102, 102, 102));
 		lblTelefone.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblTelefone.setBounds(19, 260, 119, 14);
+		lblTelefone.setBounds(19, 299, 119, 14);
 		panel.add(lblTelefone);
 		
 		JLabel lblCadastroDeMdicos = new JLabel("Cadastro de M\u00E9dicos");
@@ -227,40 +227,33 @@ public class CadastrarMedicoGUI extends JDialog {
 		JLabel lblCrm = new JLabel("CRM:");
 		lblCrm.setForeground(new Color(102, 102, 102));
 		lblCrm.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblCrm.setBounds(19, 310, 119, 14);
+		lblCrm.setBounds(19, 341, 119, 14);
 		panel.add(lblCrm);
 		
 		txtCRM = new JTextField();
 		txtCRM.setColumns(10);
-		txtCRM.setBounds(148, 305, 349, 29);
+		txtCRM.setBounds(148, 336, 349, 29);
 		panel.add(txtCRM);
 		
 		JLabel lblEspecialidade = new JLabel("Especialidades:");
 		lblEspecialidade.setForeground(new Color(102, 102, 102));
 		lblEspecialidade.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblEspecialidade.setBounds(19, 350, 119, 14);
+		lblEspecialidade.setBounds(19, 385, 119, 14);
 		panel.add(lblEspecialidade);
-		
-<<<<<<< HEAD
+
 		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.setBounds(148, 345, 89, 23);
+		btnAdicionar.setBounds(148, 380, 89, 23);
 		panel.add(btnAdicionar);
 		
 		JLabel lblPlanosDeSade = new JLabel("Planos de Sa\u00FAde");
 		lblPlanosDeSade.setForeground(new Color(102, 102, 102));
 		lblPlanosDeSade.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblPlanosDeSade.setBounds(19, 380, 119, 14);
+		lblPlanosDeSade.setBounds(279, 381, 119, 14);
 		panel.add(lblPlanosDeSade);
 		
 		JButton button = new JButton("Adicionar");
-		button.setBounds(148, 375, 89, 23);
+		button.setBounds(408, 376, 89, 23);
 		panel.add(button);
-=======
-		txtEspecialidades = new JTextField();
-		txtEspecialidades.setColumns(10);
 
-		txtEspecialidades.setBounds(148, 345, 349, 29);
-		panel.add(txtEspecialidades);
->>>>>>> origin/master
 	}
 }
