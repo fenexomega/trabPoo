@@ -1,19 +1,20 @@
 package org.GUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JRadioButton;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
 
 public class CriarEspecialidadeGUI extends JDialog
 {
@@ -43,6 +44,7 @@ public class CriarEspecialidadeGUI extends JDialog
 	 */
 	public CriarEspecialidadeGUI()
 	{
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 557, 397);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,12 +63,22 @@ public class CriarEspecialidadeGUI extends JDialog
 		contentPanel.add(label);
 		
 		JButton button = new JButton("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
 		button.setBounds(231, 304, 144, 43);
 		contentPanel.add(button);
 		
 		JButton button_1 = new JButton("Cancelar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
 		button_1.setBounds(387, 304, 144, 43);

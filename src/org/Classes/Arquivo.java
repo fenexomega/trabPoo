@@ -28,6 +28,9 @@ public class Arquivo
 	public static void LerArquivos()
 	{
 		System.out.println("Lendo Arquivos");
+		File file = new File(DIR_FILES + "gerentes.ser");
+		if(!file.exists())
+			GravarArquivo();
 		listaAtendentes 			= LerArquivoAtendentes();
 		listaConsultasParticulares  = LerArquivoConsulta_Particulares();
 		listaConsultasPlano 		= LerArquivoConsulta_Planos();
@@ -36,6 +39,7 @@ public class Arquivo
 		listaMedicos				= LerArquivoMedicos();
 		listaPacientes 				= LerArquivoPacientes();
 		listaUsuarios				= LerArquivoUsuarios();
+		listaPlanos					= LerArquivoPlano_De_Saudes();
 	}
 	
 	public static void GravarArquivo()
@@ -258,7 +262,7 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
+			lista = new ArrayList<Paciente>();
 		}
 		return lista;	
 	}
@@ -266,9 +270,10 @@ public class Arquivo
 	private static ArrayList<Plano_De_Saude> LerArquivoPlano_De_Saudes()
 	{
 		ArrayList<Plano_De_Saude> lista = null;
+		
 		try
 		{
-			FileInputStream f_In = new FileInputStream(DIR_FILES + "plano_De_Saudes.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "planos.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Plano_De_Saude>) o_In.readObject();
 			o_In.close();
@@ -279,7 +284,7 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
+			lista = new ArrayList<Plano_De_Saude>();
 		}
 		return lista;	
 	}
