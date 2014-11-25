@@ -34,7 +34,6 @@ public class CadastrarMedicoGUI extends JDialog {
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
 	private JTextField txtCRM;
-	private JTextField txtEspecialidades;
 
 	/**
 	 * Launch the application.
@@ -121,7 +120,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.controlHighlight);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(10, 385, 487, 105);
+		panel_1.setBounds(10, 414, 487, 93);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -164,7 +163,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		btnCancelar.setBackground(new Color(0, 128, 128));
 		btnCancelar.setForeground(new Color(255, 255, 255));
 		btnCancelar.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/cancelar-01.png")));
-		btnCancelar.setBounds(353, 501, 144, 43);
+		btnCancelar.setBounds(353, 518, 144, 43);
 		panel.add(btnCancelar);
 		
 		JButton btnSalvar = new JButton("Salvar");
@@ -196,7 +195,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		btnSalvar.setBackground(new Color(0, 128, 128));
 		btnSalvar.setForeground(new Color(255, 255, 255));
 		btnSalvar.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/salvar-01.png")));
-		btnSalvar.setBounds(197, 501, 144, 43);
+		btnSalvar.setBounds(197, 518, 144, 43);
 		panel.add(btnSalvar);
 		
 		JLabel label = new JLabel("");
@@ -225,9 +224,18 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEspecialidade.setBounds(19, 350, 119, 14);
 		panel.add(lblEspecialidade);
 		
-		txtEspecialidades = new JTextField();
-		txtEspecialidades.setColumns(10);
-		txtEspecialidades.setBounds(148, 345, 349, 29);
-		panel.add(txtEspecialidades);
+		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.setBounds(148, 345, 89, 23);
+		panel.add(btnAdicionar);
+		
+		JLabel lblPlanosDeSade = new JLabel("Planos de Sa\u00FAde");
+		lblPlanosDeSade.setForeground(new Color(102, 102, 102));
+		lblPlanosDeSade.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblPlanosDeSade.setBounds(19, 380, 119, 14);
+		panel.add(lblPlanosDeSade);
+		
+		JButton button = new JButton("Adicionar");
+		button.setBounds(148, 375, 89, 23);
+		panel.add(button);
 	}
 }

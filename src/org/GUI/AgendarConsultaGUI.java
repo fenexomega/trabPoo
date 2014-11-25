@@ -17,6 +17,7 @@ import java.awt.TextField;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class AgendarConsultaGUI extends JFrame {
 
@@ -108,13 +109,13 @@ public class AgendarConsultaGUI extends JFrame {
 		panel_1.add(btnVerificarCpf);
 		
 		JLabel lblMdicos = new JLabel("M\u00E9dicos");
-		lblMdicos.setBounds(10, 53, 217, 29);
+		lblMdicos.setBounds(363, 43, 217, 29);
 		panel_1.add(lblMdicos);
 		lblMdicos.setForeground(Color.GRAY);
 		lblMdicos.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 81, 128, 20);
+		comboBox.setBounds(363, 71, 128, 20);
 		panel_1.add(comboBox);
 		
 		JLabel lblData = new JLabel("Data");
@@ -145,11 +146,25 @@ public class AgendarConsultaGUI extends JFrame {
 		JLabel lblPlanoDeSade = new JLabel("Plano de sa\u00FAde");
 		lblPlanoDeSade.setForeground(Color.GRAY);
 		lblPlanoDeSade.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
-		lblPlanoDeSade.setBounds(10, 190, 217, 29);
+		lblPlanoDeSade.setBounds(10, 60, 144, 29);
 		panel_1.add(lblPlanoDeSade);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(10, 218, 128, 20);
+		comboBox_1.setBounds(10, 88, 128, 20);
 		panel_1.add(comboBox_1);
+		
+		JRadioButton rdbtnConsultaParticular = new JRadioButton("Consulta particular");
+		rdbtnConsultaParticular.setBounds(10, 196, 168, 23);
+		panel_1.add(rdbtnConsultaParticular);
+		
+		TextField textField_3 = new TextField();
+		textField_3.setBounds(62, 224, 134, 22);
+		panel_1.add(textField_3);
+		
+		JLabel lblValor = new JLabel("Valor:");
+		lblValor.setForeground(Color.GRAY);
+		lblValor.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
+		lblValor.setBounds(10, 217, 55, 29);
+		panel_1.add(lblValor);
 	}
 }
