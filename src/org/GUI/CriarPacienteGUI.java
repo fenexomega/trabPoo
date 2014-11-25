@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.Classes.Arquivo;
+import org.Classes.Atendente;
 import org.Classes.Paciente;
 
 import javax.swing.ImageIcon;
@@ -29,7 +30,7 @@ public class CriarPacienteGUI extends JDialog
 	private JTextField txtNome;
 	private JTextField txtCpf;
 	private JTextField txtEndereo;
-	private JTextField textField;
+	private JTextField txtTelefone;
 
 	/**
 	 * Launch the application.
@@ -92,10 +93,10 @@ public class CriarPacienteGUI extends JDialog
 		contentPanel.add(txtEndereo);
 		txtEndereo.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(114, 274, 320, 29);
-		textField.setColumns(10);
-		contentPanel.add(textField);
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(114, 274, 320, 29);
+		txtTelefone.setColumns(10);
+		contentPanel.add(txtTelefone);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 449, 109);
@@ -124,24 +125,16 @@ public class CriarPacienteGUI extends JDialog
 				Paciente p = new Paciente();
 				List<Paciente> listaPacientes = Arquivo.getListaPacientes();
 				p.setCpf(txtCpf.getText());
-				for (Paciente paciente : listaPacientes)
-				{
-					if(paciente.equals(p))
-					{
-						JOptionPane.showMessageDialog(getContentPane(), "CPF já cadastrado.");
-						return;
-
-					}
-					
-				}
-		
-
 				p.setNome(txtNome.getText());
 				p.setEndereco(txtEndereo.getText());
+				p.setTelefone(txtTelefone.getText());
 				
-				listaPacientes.add(p);
 				
-				Arquivo.GravarArquivo();
+				if(!Atendente.Cadastrar(p))
+				{
+					JOptionPane.showMessageDialog(getContentPane(), "CPF já cadastrado.");
+					return;
+				}
 				
 				JOptionPane.showMessageDialog(getContentPane(), "Paciente cadastrado com sucesso");
 				
