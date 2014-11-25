@@ -5,26 +5,32 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import org.Classes.Medico;
+
 public class CadastrarMedicoGUI extends JDialog {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtUsername;
+	private JPasswordField pwdPassword;
+	private JTextField txtCRM;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -58,36 +64,31 @@ public class CadastrarMedicoGUI extends JDialog {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(148, 240, 172, 29);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNome = new JLabel("E-mail: ");
-		lblNome.setBounds(19, 165, 71, 14);
-		panel.add(lblNome);
-		lblNome.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblNome.setForeground(new Color(102, 102, 102));
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setBounds(19, 165, 85, 14);
+		panel.add(lblUsername);
+		lblUsername.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		lblUsername.setForeground(new Color(102, 102, 102));
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(148, 200, 349, 29);
+		textField_1.setBounds(148, 279, 349, 29);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
+		JLabel lblEndereo = new JLabel("Senha:");
 		lblEndereo.setBounds(19, 205, 85, 14);
 		panel.add(lblEndereo);
 		lblEndereo.setForeground(new Color(102, 102, 102));
 		lblEndereo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
 		JLabel lblComplemento = new JLabel("Complemento:");
-		lblComplemento.setBounds(19, 245, 119, 14);
+		lblComplemento.setBounds(19, 244, 119, 14);
 		panel.add(lblComplemento);
 		lblComplemento.setForeground(new Color(102, 102, 102));
 		lblComplemento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(148, 160, 349, 29);
+		textField_2.setBounds(148, 238, 349, 29);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -102,17 +103,17 @@ public class CadastrarMedicoGUI extends JDialog {
 		label_1.setBounds(19, 120, 71, 14);
 		panel.add(label_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(148, 280, 172, 29);
-		panel.add(textField_4);
+		txtUsername = new JTextField();
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(148, 159, 349, 29);
+		panel.add(txtUsername);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/adicionar-01.png")));
 		lblNewLabel.setBounds(256, 48, 20, 35);
 		panel.add(lblNewLabel);
 		
-		JLabel lblTelefone = new JLabel("Telefone: ");
+		JLabel lblTelefone = new JLabel("Endereço:");
 		lblTelefone.setForeground(new Color(102, 102, 102));
 		lblTelefone.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		lblTelefone.setBounds(19, 285, 119, 14);
@@ -127,7 +128,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.controlHighlight);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(0, 320, 507, 187);
+		panel_1.setBounds(10, 401, 507, 105);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -162,6 +163,11 @@ public class CadastrarMedicoGUI extends JDialog {
 		panel_1.add(chckbxSbado);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBackground(new Color(0, 128, 128));
 		btnCancelar.setForeground(new Color(255, 255, 255));
 		btnCancelar.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/cancelar-01.png")));
@@ -169,6 +175,11 @@ public class CadastrarMedicoGUI extends JDialog {
 		panel.add(btnCancelar);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+//				Medico m = new Medico();
+			}
+		});
 		btnSalvar.setBackground(new Color(0, 128, 128));
 		btnSalvar.setForeground(new Color(255, 255, 255));
 		btnSalvar.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/salvar-01.png")));
@@ -179,5 +190,31 @@ public class CadastrarMedicoGUI extends JDialog {
 		label.setIcon(new ImageIcon(CadastrarMedicoGUI.class.getResource("/Images/inicial_background.png")));
 		label.setBounds(10, 11, 487, 93);
 		panel.add(label);
+		
+		pwdPassword = new JPasswordField();
+		pwdPassword.setBounds(148, 203, 349, 20);
+		panel.add(pwdPassword);
+		
+		JLabel lblCrm = new JLabel("CRM");
+		lblCrm.setForeground(new Color(102, 102, 102));
+		lblCrm.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblCrm.setBounds(19, 331, 119, 14);
+		panel.add(lblCrm);
+		
+		txtCRM = new JTextField();
+		txtCRM.setColumns(10);
+		txtCRM.setBounds(148, 320, 349, 29);
+		panel.add(txtCRM);
+		
+		JLabel lblEspecialidade = new JLabel("Especialidades");
+		lblEspecialidade.setForeground(new Color(102, 102, 102));
+		lblEspecialidade.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblEspecialidade.setBounds(19, 375, 119, 14);
+		panel.add(lblEspecialidade);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(148, 360, 349, 29);
+		panel.add(textField);
 	}
 }

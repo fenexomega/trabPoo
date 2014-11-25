@@ -17,6 +17,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.Classes.Atendente;
+import org.Classes.Gerente;
+import org.Classes.Medico;
 import org.Classes.Usuario;
 import org.Processos.Logador;
 
@@ -43,6 +46,7 @@ public class LoginGUI extends JFrame
 		}
 	}
 
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -101,7 +105,38 @@ public class LoginGUI extends JFrame
 					else if(Logador.UsuarioValido(u) == Logador.STATUS.SENHA_INCORRETA)
 						JOptionPane.showMessageDialog(getContentPane(), "Senha incorreta.");
 					
+					Object classe = Logador.PegarDonoDoUsuario(u);
+					
+					if(classe instanceof Atendente)
+					{
+						AtendenteGUI gui = AtendenteGUI.GetInstance();
+						gui.setVisible(true);
+						dispose();
+						return;
+					}
+					if(classe instanceof Medico)
+					{
+						MedicoGUI gui = new MedicoGUI();
+						gui.setVisible(true);
+						dispose();
+						return;
 
+					}
+					if(classe instanceof Gerente)
+					{
+						MedicoGUI gui = new MedicoGUI();
+						gui.setVisible(true);
+						dispose();
+						return;
+
+					}
+					
+//					AdminGUI adm = new AdminGUI();
+//					adm.setVisible(true);
+					
+					
+					
+					return;
 
 				}
 			});

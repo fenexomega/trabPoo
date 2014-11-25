@@ -16,7 +16,7 @@ public class Usuario implements Serializable
 	{
 		if(!(obj instanceof Usuario))
 			return false;
-		if(((Usuario) obj).login == login)
+		if(((Usuario) obj).login.equals(login))
 			return true;
 		
 		return false;
