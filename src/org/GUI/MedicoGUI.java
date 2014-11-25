@@ -26,7 +26,6 @@ import org.Classes.Paciente;
 public class MedicoGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTable table;
 
 	/**
@@ -79,21 +78,18 @@ public class MedicoGUI extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(554, 187, 282, 27);
-		panel.add(textField);
-		
 		JLabel lblNewLabel_1 = new JLabel("Dr. Fulano");
 		lblNewLabel_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(745, 139, 130, 14);
 		panel.add(lblNewLabel_1);
 		
-		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/pesquisa-01.png")));
-		button_1.setBounds(839, 187, 40, 27);
-		panel.add(button_1);
+		JButton btnListar = new JButton("Listar atendimentos");
+		btnListar.setForeground(new Color(255, 255, 255));
+		btnListar.setBackground(new Color(0, 128, 128));
+		btnListar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+		btnListar.setBounds(554, 528, 321, 48);
+		panel.add(btnListar);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/medico-01.png")));
@@ -116,7 +112,7 @@ public class MedicoGUI extends JFrame {
 		label_2.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/inicial_background.png")));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(553, 218, 326, 277);
+		scrollPane.setBounds(554, 187, 326, 277);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -135,7 +131,7 @@ public class MedicoGUI extends JFrame {
 		btnSalvar.setForeground(new Color(255, 255, 255));
 		btnSalvar.setBackground(new Color(0, 102, 102));
 		btnSalvar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
-		btnSalvar.setBounds(554, 501, 134, 48);
+		btnSalvar.setBounds(554, 475, 156, 48);
 		panel.add(btnSalvar);
 		
 		JPanel panel_1 = new JPanel();
@@ -187,7 +183,7 @@ public class MedicoGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnLimparTudo.setBounds(732, 501, 147, 48);
+		btnLimparTudo.setBounds(713, 475, 166, 48);
 		panel.add(btnLimparTudo);
 	}
 }

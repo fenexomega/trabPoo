@@ -123,13 +123,6 @@ public class AgendarConsultaGUI extends JFrame {
 		lblData.setForeground(Color.GRAY);
 		lblData.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/cadastrar_paciente.png")));
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 23));
-		label_1.setBounds(632, 11, 104, 100);
-		panel_1.add(label_1);
-		
 		JButton button_1 = new JButton("Salvar");
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));
 		button_1.setForeground(Color.WHITE);
@@ -148,5 +141,15 @@ public class AgendarConsultaGUI extends JFrame {
 		button_2.setBackground(new Color(0, 128, 128));
 		button_2.setBounds(592, 214, 144, 43);
 		panel_1.add(button_2);
+		
+		JLabel lblPlanoDeSade = new JLabel("Plano de sa\u00FAde");
+		lblPlanoDeSade.setForeground(Color.GRAY);
+		lblPlanoDeSade.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
+		lblPlanoDeSade.setBounds(10, 190, 217, 29);
+		panel_1.add(lblPlanoDeSade);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(10, 218, 128, 20);
+		panel_1.add(comboBox_1);
 	}
 }
