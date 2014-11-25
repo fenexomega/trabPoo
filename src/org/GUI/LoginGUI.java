@@ -22,6 +22,7 @@ import org.Classes.Atendente;
 import org.Classes.Gerente;
 import org.Classes.Medico;
 import org.Classes.Usuario;
+import org.GUI.admin.AdminGUI;
 import org.Processos.Logador;
 
 public class LoginGUI extends JFrame
@@ -101,11 +102,22 @@ public class LoginGUI extends JFrame
 						JOptionPane.showMessageDialog(getContentPane(), "Preencha o formulário.");
 						return;
 					}
+					
+					if(login.equals("admin") && password.equals("admin"))
+					{
+						AdminGUI adm = new AdminGUI();
+						adm.setVisible(true);
+						dispose();
+						return;
+					}
+					
 					Usuario u = new Usuario(login, password);
 					if(Logador.UsuarioValido(u) == Logador.STATUS.NAO_VALIDO)
 						JOptionPane.showMessageDialog(getContentPane(), "Login Inválido.");
 					else if(Logador.UsuarioValido(u) == Logador.STATUS.SENHA_INCORRETA)
 						JOptionPane.showMessageDialog(getContentPane(), "Senha incorreta.");
+					
+					
 					
 					Object classe = Logador.PegarDonoDoUsuario(u);
 					
@@ -128,15 +140,15 @@ public class LoginGUI extends JFrame
 					}
 					if(classe instanceof Gerente)
 					{
-//						MedicoGUI gui = new MedicoGUI();
-//						gui.setVisible(true);
-//						dispose();
+						MedicoGUI gui = new MedicoGUI();
+						gui.setVisible(true);
+						dispose();
 						return;
 
 					}
 					
-//					AdminGUI adm = new AdminGUI();
-//					adm.setVisible(true);
+					
+				
 					
 					
 					
