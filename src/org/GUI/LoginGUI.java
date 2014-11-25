@@ -113,9 +113,16 @@ public class LoginGUI extends JFrame
 					
 					Usuario u = new Usuario(login, password);
 					if(Logador.UsuarioValido(u) == Logador.STATUS.NAO_VALIDO)
+					{
 						JOptionPane.showMessageDialog(getContentPane(), "Login Inválido.");
+						return;
+
+					}
 					else if(Logador.UsuarioValido(u) == Logador.STATUS.SENHA_INCORRETA)
+					{
 						JOptionPane.showMessageDialog(getContentPane(), "Senha incorreta.");
+						return;
+					}
 					
 					
 					
@@ -140,7 +147,7 @@ public class LoginGUI extends JFrame
 					}
 					if(classe instanceof Gerente)
 					{
-						MedicoGUI gui = new MedicoGUI();
+						GerenteGUI gui = new GerenteGUI();
 						gui.setVisible(true);
 						dispose();
 						return;

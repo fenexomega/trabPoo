@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GerenteGUI extends JFrame {
 
@@ -43,6 +45,11 @@ public class GerenteGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_1.setIcon(new ImageIcon(GerenteGUI.class.getResource("/Images/sair-01.png")));
 		button_1.setBackground(SystemColor.desktop);
 		button_1.setBounds(465, 67, 89, 82);
