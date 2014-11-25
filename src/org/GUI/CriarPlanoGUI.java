@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CriarPlanoGUI extends JFrame {
 
@@ -95,12 +97,22 @@ public class CriarPlanoGUI extends JFrame {
 		contentPane.add(textField_3);
 		
 		button = new JButton("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
 		button.setBounds(148, 232, 144, 43);
 		contentPane.add(button);
 		
 		button_1 = new JButton("Cancelar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
 		button_1.setBounds(304, 232, 144, 43);
