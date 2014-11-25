@@ -1,28 +1,25 @@
 package org.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import org.Classes.Atendente;
 import org.Classes.Plano_De_Saude;
 import org.GUI.util.ErrorGUI;
 
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class CriarPlanoGUI extends JFrame {
+public class CriarPlanoGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtRazao;
@@ -54,7 +51,8 @@ public class CriarPlanoGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public CriarPlanoGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 474, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

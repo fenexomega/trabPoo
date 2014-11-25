@@ -245,6 +245,13 @@ public class AtendenteGUI extends JFrame {
 		));
 		
 		JButton btnNewButton_1 = new JButton("Criar Plano de Sa\u00FAde");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CriarPlanoGUI cp = new CriarPlanoGUI();
+				cp.setVisible(true);
+				
+			}
+		});
 		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setBackground(new Color(0, 153, 204));
 		btnNewButton_1.setBounds(696, 402, 185, 54);

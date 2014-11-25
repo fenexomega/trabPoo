@@ -24,10 +24,13 @@ import javax.swing.border.EmptyBorder;
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
 import org.Classes.Medico;
-import org.Classes.Paciente;
 
 public class CadastrarMedicoGUI extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtEndereco;
 	private JTextField txtTelefone;
@@ -186,7 +189,6 @@ public class CadastrarMedicoGUI extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Medico m =  new Medico(null, null, null, null, null, null, null);
-				List<Medico> listaPacientes = Arquivo.getListaMedicos();
 				
 				m.setNome(txtNome.getText());
 				m.setUsername(txtUsername.getText());
@@ -196,11 +198,11 @@ public class CadastrarMedicoGUI extends JDialog {
 				
 				if(!Atendente.Cadastrar(m))
 				{
-					JOptionPane.showMessageDialog(getContentPane(), "CRM j� cadastrado.");
+					JOptionPane.showMessageDialog(getContentPane(), "CRM já cadastrado.");
 					return;
 				}
 				
-				JOptionPane.showMessageDialog(getContentPane(), "M�dico cadastrado com sucesso");
+				JOptionPane.showMessageDialog(getContentPane(), "Médico cadastrado com sucesso");
 				
 
 				AtendenteGUI.GetInstance().AtualizarTabelaMedicos();
@@ -252,6 +254,10 @@ public class CadastrarMedicoGUI extends JDialog {
 		panel.add(lblPlanosDeSade);
 		
 		JButton button = new JButton("Adicionar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		button.setBounds(408, 376, 89, 23);
 		panel.add(button);
 
