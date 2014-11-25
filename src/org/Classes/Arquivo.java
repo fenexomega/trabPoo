@@ -1,5 +1,6 @@
 package org.Classes;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class Arquivo
 	private static List<Consulta_Particular> 	listaConsultasParticulares;
 	private static List<Consulta_Plano> 		listaConsultasPlano;
 	private static List<Plano_De_Saude>	 		listaPlanos;
+	private static String DIR_FILES = "resource/";
 
 	// Método que lê todos os arquivos e coloca nas listas.
 	public static void LerArquivos()
@@ -41,55 +43,64 @@ public class Arquivo
 		try
 		{
 			System.out.println("Gravando dados");
-			FileOutputStream f_out = new FileOutputStream("gerentes.ser");
+			File folder = new File(DIR_FILES);
+			if(!folder.exists())
+			{
+				if(!folder.mkdir())
+				{
+					System.out.println("Foi impossível criar a pasta. Saindo!");
+					return;
+				}
+			}
+			FileOutputStream f_out = new FileOutputStream(DIR_FILES + "gerentes.ser");
 			ObjectOutputStream o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaGerente);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("usuarios.ser");
+			f_out = new FileOutputStream(DIR_FILES + "usuarios.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaUsuarios);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("pacientes.ser");
+			f_out = new FileOutputStream(DIR_FILES + "pacientes.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaPacientes);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("atendentes.ser");
+			f_out = new FileOutputStream(DIR_FILES + "atendentes.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaAtendentes);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("medicos.ser");
+			f_out = new FileOutputStream(DIR_FILES + "medicos.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaMedicos);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("especialidades.ser");
+			f_out = new FileOutputStream(DIR_FILES + "especialidades.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaEspecialidades);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("consultaparticular.ser");
+			f_out = new FileOutputStream(DIR_FILES + "consultaparticular.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaConsultasParticulares);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("consultaplano.ser");
+			f_out = new FileOutputStream(DIR_FILES + "consultaplano.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaConsultasParticulares);
 			o_out.close();
 			f_out.close();
 			
-			f_out = new FileOutputStream("planos.ser");
+			f_out = new FileOutputStream(DIR_FILES + "planos.ser");
 			o_out = new ObjectOutputStream(f_out);
 			o_out.writeObject(listaPlanos);
 			o_out.close();
@@ -110,7 +121,7 @@ public class Arquivo
 		ArrayList<Atendente> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("atendentes.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "atendentes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Atendente>) o_In.readObject();
 			o_In.close();
@@ -131,7 +142,7 @@ public class Arquivo
 		ArrayList<Consulta_Particular> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("consultaparticular.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "consultaparticular.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Consulta_Particular>) o_In.readObject();
 			o_In.close();
@@ -152,7 +163,7 @@ public class Arquivo
 		ArrayList<Consulta_Plano> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("consultaplano.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "consultaplano.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Consulta_Plano>) o_In.readObject();
 			o_In.close();
@@ -173,7 +184,7 @@ public class Arquivo
 		ArrayList<Especialidade> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("especialidades.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "especialidades.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Especialidade>) o_In.readObject();
 			o_In.close();
@@ -194,7 +205,7 @@ public class Arquivo
 		ArrayList<Gerente> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("gerentes.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "gerentes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Gerente>) o_In.readObject();
 			o_In.close();
@@ -215,7 +226,7 @@ public class Arquivo
 		ArrayList<Medico> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("medicos.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "medicos.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Medico>) o_In.readObject();
 			o_In.close();
@@ -236,7 +247,7 @@ public class Arquivo
 		ArrayList<Paciente> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("pacientes.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "pacientes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Paciente>) o_In.readObject();
 			o_In.close();
@@ -257,7 +268,7 @@ public class Arquivo
 		ArrayList<Plano_De_Saude> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("plano_De_Saudes.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "plano_De_Saudes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Plano_De_Saude>) o_In.readObject();
 			o_In.close();
@@ -278,7 +289,7 @@ public class Arquivo
 		ArrayList<Usuario> lista = null;
 		try
 		{
-			FileInputStream f_In = new FileInputStream("usuarios.ser");
+			FileInputStream f_In = new FileInputStream(DIR_FILES + "usuarios.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
 			lista = (ArrayList<Usuario>) o_In.readObject();
 			o_In.close();
