@@ -9,8 +9,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
+
+import org.Classes.Atendente;
+import org.Classes.Plano_De_Saude;
+import org.GUI.util.ErrorGUI;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,10 +25,10 @@ import java.awt.event.ActionEvent;
 public class CriarPlanoGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtRazao;
+	private JTextField txtCNPJ;
+	private JTextField txtEndereo;
+	private JTextField txtTelefone;
 	private JButton button;
 	private JButton button_1;
 	private JLabel label;
@@ -76,30 +83,48 @@ public class CriarPlanoGUI extends JFrame {
 		lblNewLabel.setBounds(10, 25, 259, 27);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(117, 92, 284, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtRazao = new JTextField();
+		txtRazao.setBounds(117, 92, 284, 20);
+		contentPane.add(txtRazao);
+		txtRazao.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(117, 120, 284, 20);
-		contentPane.add(textField_1);
+		txtCNPJ = new JTextField();
+		txtCNPJ.setColumns(10);
+		txtCNPJ.setBounds(117, 120, 284, 20);
+		contentPane.add(txtCNPJ);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(117, 148, 284, 20);
-		contentPane.add(textField_2);
+		txtEndereo = new JTextField();
+		txtEndereo.setColumns(10);
+		txtEndereo.setBounds(117, 148, 284, 20);
+		contentPane.add(txtEndereo);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(117, 176, 284, 20);
-		contentPane.add(textField_3);
+		txtTelefone = new JTextField();
+		txtTelefone.setColumns(10);
+		txtTelefone.setBounds(117, 176, 284, 20);
+		contentPane.add(txtTelefone);
 		
 		button = new JButton("Salvar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Plano_De_Saude p = new Plano_De_Saude();
+				p.setCnpj(txtCNPJ.getText());
+				p.setEndereco(txtEndereo.getText());
+				p.setRazaoSocial(txtRazao.getText());
+				p.setTelefone(txtTelefone.getText());
 				
+				if(txtCNPJ.getText().isEmpty() || txtEndereo.getText().isEmpty() || txtRazao.getText().isEmpty() || txtTelefone.getText().isEmpty() )
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Preencha todo o formulário.");
+					return;
+				}
+				
+				if(!Atendente.Cadastrar(p))
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "CNPJ já cadastrado!");
+					return;
+				}
+				
+				ErrorGUI.MostrarErro(getContentPane(), "Plano cadastrado com sucesso.");
 			}
 		});
 		button.setForeground(Color.WHITE);

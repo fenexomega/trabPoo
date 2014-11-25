@@ -3,7 +3,6 @@ package org.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -14,8 +13,6 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
-
-import javax.swing.JTextField;
 
 import java.awt.Color;
 
@@ -34,15 +31,17 @@ import org.Classes.Medico;
 import org.Classes.Paciente;
 import org.GUI.util.ErrorGUI;
 
-import java.awt.Label;
-import java.awt.Font;
+
 
 import javax.swing.JTabbedPane;
-import javax.swing.JList;
-import javax.swing.JComboBox;
+
 //SINGLETON
 public class AtendenteGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String[][] listaStringsPacientes;
 	private String[][] listaStringsMedicos;
@@ -181,7 +180,7 @@ public class AtendenteGUI extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cp = new CriarPacienteGUI();
-				cp.show();
+				cp.setVisible(true);;
 				
 			}
 		});
