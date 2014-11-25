@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminGUI
 {
@@ -60,12 +62,22 @@ public class AdminGUI
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JButton btnCadastrarAtendente = new JButton("Cadastrar Atendente");
+		btnCadastrarAtendente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarAtendenteGUI ca = new CadastrarAtendenteGUI();
+				ca.setVisible(true);
+			}
+		});
 		btnCadastrarAtendente.setForeground(new Color(255, 255, 255));
 		btnCadastrarAtendente.setBackground(new Color(0, 128, 128));
 		btnCadastrarAtendente.setBounds(362, 187, 210, 119);
 		frame.getContentPane().add(btnCadastrarAtendente);
 		
 		JButton btnCadastrarGerente = new JButton("Cadastrar Gerente");
+		btnCadastrarGerente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCadastrarGerente.setForeground(new Color(255, 255, 255));
 		btnCadastrarGerente.setBackground(new Color(0, 128, 128));
 		btnCadastrarGerente.setBounds(54, 185, 210, 123);

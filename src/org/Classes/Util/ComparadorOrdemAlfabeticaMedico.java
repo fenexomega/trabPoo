@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import org.Classes.Medico;
 
-public class CopyOfComparadorOrdemAlfabeticaMedico implements Comparator<Medico>
+public class ComparadorOrdemAlfabeticaMedico implements Comparator<Medico>
 {
 
 	@Override
