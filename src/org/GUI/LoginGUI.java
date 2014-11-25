@@ -15,12 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
 import javax.swing.border.EmptyBorder;
 
 import org.Classes.Atendente;
 import org.Classes.Gerente;
 import org.Classes.Medico;
 import org.Classes.Usuario;
+import org.GUI.admin.AdminGUI;
 import org.Processos.Logador;
 
 public class LoginGUI extends JFrame
@@ -48,6 +50,7 @@ public class LoginGUI extends JFrame
 
 	
 	/**
+	 * 
 	 * Create the dialog.
 	 */
 	public LoginGUI()
@@ -99,11 +102,22 @@ public class LoginGUI extends JFrame
 						JOptionPane.showMessageDialog(getContentPane(), "Preencha o formulário.");
 						return;
 					}
+					
+					if(login.equals("admin") && password.equals("admin"))
+					{
+						AdminGUI adm = new AdminGUI();
+						adm.setVisible(true);
+						dispose();
+						return;
+					}
+					
 					Usuario u = new Usuario(login, password);
 					if(Logador.UsuarioValido(u) == Logador.STATUS.NAO_VALIDO)
 						JOptionPane.showMessageDialog(getContentPane(), "Login Inválido.");
 					else if(Logador.UsuarioValido(u) == Logador.STATUS.SENHA_INCORRETA)
 						JOptionPane.showMessageDialog(getContentPane(), "Senha incorreta.");
+					
+					
 					
 					Object classe = Logador.PegarDonoDoUsuario(u);
 					
@@ -112,11 +126,13 @@ public class LoginGUI extends JFrame
 						AtendenteGUI gui = AtendenteGUI.GetInstance();
 						gui.setVisible(true);
 						dispose();
+						
 						return;
 					}
 					if(classe instanceof Medico)
 					{
 						MedicoGUI gui = new MedicoGUI();
+						gui.setNomeMedico(((Medico) classe).getNome());
 						gui.setVisible(true);
 						dispose();
 						return;
@@ -131,8 +147,8 @@ public class LoginGUI extends JFrame
 
 					}
 					
-//					AdminGUI adm = new AdminGUI();
-//					adm.setVisible(true);
+					
+				
 					
 					
 					

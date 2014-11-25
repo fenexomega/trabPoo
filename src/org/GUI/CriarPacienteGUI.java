@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
 import org.Classes.Paciente;
+import org.GUI.util.ErrorGUI;
 
 import javax.swing.ImageIcon;
 
@@ -123,14 +124,20 @@ public class CriarPacienteGUI extends JDialog
 				p.setNome(txtNome.getText());
 				p.setEndereco(txtEndereo.getText());
 				
-				
+				if(txtNome.getText().isEmpty() || txtEndereo.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtCpf.getText().isEmpty())
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Preencha todos os dados.");
+					return;
+
+				}
+					
 				if(!Atendente.Cadastrar(p))
 				{
-					JOptionPane.showMessageDialog(getContentPane(), "CPF já cadastrado.");
+					ErrorGUI.MostrarErro(getContentPane(), "CPF já cadastrado.");
 					return;
 				}
 				
-				JOptionPane.showMessageDialog(getContentPane(), "Paciente cadastrado com sucesso");
+				ErrorGUI.MostrarErro(getContentPane(), "Paciente cadastrado com sucesso");
 				
 
 				AtendenteGUI.GetInstance().AtualizarTabelaPacientes();

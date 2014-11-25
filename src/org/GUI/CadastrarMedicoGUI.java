@@ -30,6 +30,8 @@ public class CadastrarMedicoGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtEndereco;
+	private JTextField txtTelefone;
+
 	private JTextField txtNome;
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
@@ -74,6 +76,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblUsername.setForeground(new Color(102, 102, 102));
 		
 		txtEndereco = new JTextField();
+
 		txtEndereco.setBounds(148, 255, 349, 29);
 		panel.add(txtEndereco);
 		txtEndereco.setColumns(10);
@@ -84,9 +87,21 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEndereo.setForeground(new Color(102, 102, 102));
 		lblEndereo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
+		JLabel lblComplemento = new JLabel("Telefone:");
+		lblComplemento.setBounds(19, 244, 119, 14);
+		panel.add(lblComplemento);
+		lblComplemento.setForeground(new Color(102, 102, 102));
+		lblComplemento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
+		
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(148, 238, 349, 29);
+		panel.add(txtTelefone);
+		txtTelefone.setColumns(10);
+		
 		txtNome = new JTextField();
 		txtNome.setColumns(10);
-		txtNome.setBounds(147, 115, 349, 29);
+		txtNome.setBounds(148, 115, 349, 29);
+
 		panel.add(txtNome);
 		
 		JLabel label_1 = new JLabel("Nome: ");
@@ -169,6 +184,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				Medico m =  new Medico(null, null, null, null, null, null, null);
 				List<Medico> listaPacientes = Arquivo.getListaMedicos();
 				
@@ -176,14 +192,15 @@ public class CadastrarMedicoGUI extends JDialog {
 				m.setUsername(txtUsername.getText());
 				m.setSenha(pwdPassword.getEchoChar());
 				m.setCRM(txtCRM.getText());
+				m.setTelefone(txtTelefone.getText());
 				
 				if(!Atendente.Cadastrar(m))
 				{
-					JOptionPane.showMessageDialog(getContentPane(), "CRM já cadastrado.");
+					JOptionPane.showMessageDialog(getContentPane(), "CRM jï¿½ cadastrado.");
 					return;
 				}
 				
-				JOptionPane.showMessageDialog(getContentPane(), "Médico cadastrado com sucesso");
+				JOptionPane.showMessageDialog(getContentPane(), "Mï¿½dico cadastrado com sucesso");
 				
 
 				AtendenteGUI.GetInstance().AtualizarTabelaMedicos();
@@ -224,6 +241,7 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEspecialidade.setBounds(19, 350, 119, 14);
 		panel.add(lblEspecialidade);
 		
+<<<<<<< HEAD
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setBounds(148, 345, 89, 23);
 		panel.add(btnAdicionar);
@@ -237,5 +255,12 @@ public class CadastrarMedicoGUI extends JDialog {
 		JButton button = new JButton("Adicionar");
 		button.setBounds(148, 375, 89, 23);
 		panel.add(button);
+=======
+		txtEspecialidades = new JTextField();
+		txtEspecialidades.setColumns(10);
+
+		txtEspecialidades.setBounds(148, 345, 349, 29);
+		panel.add(txtEspecialidades);
+>>>>>>> origin/master
 	}
 }

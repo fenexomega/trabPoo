@@ -32,6 +32,7 @@ import javax.swing.JTable;
 import org.Classes.Arquivo;
 import org.Classes.Medico;
 import org.Classes.Paciente;
+import org.GUI.util.ErrorGUI;
 
 import java.awt.Label;
 import java.awt.Font;
@@ -141,10 +142,10 @@ public class AtendenteGUI extends JFrame {
 				if(tab_paciente.getSelectedRow() == -1)
 				{
 					//GERAR ERRO, nenhuma linha foi selecionada
-					JOptionPane.showMessageDialog(contentPane, "Nenhuma linha foi selecionada");
+					ErrorGUI.MostrarErro(contentPane, "Nenhuma linha foi selecionada");
 				}
 				else
-					JOptionPane.showMessageDialog(contentPane,tab_paciente.getModel().getValueAt(tab_paciente.getSelectedRow(), 1));
+					ErrorGUI.MostrarErro(contentPane,tab_paciente.getModel().getValueAt(tab_paciente.getSelectedRow(), 1).toString());
 			}
 		});
 		button_3.setBackground(SystemColor.desktop);
@@ -221,12 +222,12 @@ public class AtendenteGUI extends JFrame {
 				
 				listaStringsPacientes,
 				new String[] {
-						"Nome", "CPF", "Endereço"
+						"Nome", "CPF", "Endereï¿½o"
 				}	
 		));
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("Médicos", null, panel_2, null);
+		tabbedPane.addTab("Mï¿½dicos", null, panel_2, null);
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
