@@ -250,6 +250,18 @@ public class AtendenteGUI extends JFrame {
 		btnNewButton_1.setBackground(new Color(0, 153, 204));
 		btnNewButton_1.setBounds(696, 402, 185, 54);
 		panel.add(btnNewButton_1);
+		
+		JButton btnVerificarDias = new JButton("Verificar dias disponiveis");
+		btnVerificarDias.setForeground(Color.WHITE);
+		btnVerificarDias.setBackground(new Color(0, 153, 204));
+		btnVerificarDias.setBounds(696, 532, 185, 54);
+		panel.add(btnVerificarDias);
+		
+		JButton btnCriarEspecialidade = new JButton("Criar Especialidades");
+		btnCriarEspecialidade.setForeground(Color.WHITE);
+		btnCriarEspecialidade.setBackground(new Color(0, 153, 204));
+		btnCriarEspecialidade.setBounds(696, 467, 185, 54);
+		panel.add(btnCriarEspecialidade);
 			
 	}
 }

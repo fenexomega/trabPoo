@@ -12,11 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.Label;
 
 public class CriarEspecialidadeGUI extends JDialog
 {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -45,35 +49,11 @@ public class CriarEspecialidadeGUI extends JDialog
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Cardiologia");
-		rdbtnNewRadioButton.setBounds(21, 146, 109, 23);
-		contentPanel.add(rdbtnNewRadioButton);
-		
 		JLabel lblEspecialidades = new JLabel("Especialidades");
 		lblEspecialidades.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 17));
 		lblEspecialidades.setForeground(new Color(255, 255, 255));
 		lblEspecialidades.setBounds(21, 38, 170, 23);
 		contentPanel.add(lblEspecialidades);
-		
-		JRadioButton rdbtnCirurgiaVascular = new JRadioButton("Cirurgia Vascular");
-		rdbtnCirurgiaVascular.setBounds(21, 185, 109, 23);
-		contentPanel.add(rdbtnCirurgiaVascular);
-		
-		JRadioButton rdbtnEndoscopia = new JRadioButton("Endoscopia");
-		rdbtnEndoscopia.setBounds(21, 229, 109, 23);
-		contentPanel.add(rdbtnEndoscopia);
-		
-		JRadioButton rdbtnGenticaMdic = new JRadioButton("Gen\u00E9tica m\u00E9dica");
-		rdbtnGenticaMdic.setBounds(150, 146, 135, 23);
-		contentPanel.add(rdbtnGenticaMdic);
-		
-		JRadioButton rdbtnMedicinaDoTrabalho = new JRadioButton("Medicina do Trabalho");
-		rdbtnMedicinaDoTrabalho.setBounds(150, 185, 170, 23);
-		contentPanel.add(rdbtnMedicinaDoTrabalho);
-		
-		JRadioButton rdbtnOrtopedia = new JRadioButton("Ortopedia");
-		rdbtnOrtopedia.setBounds(150, 229, 109, 23);
-		contentPanel.add(rdbtnOrtopedia);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 541, 93);
@@ -91,5 +71,28 @@ public class CriarEspecialidadeGUI extends JDialog
 		button_1.setBackground(new Color(0, 128, 128));
 		button_1.setBounds(387, 304, 144, 43);
 		contentPanel.add(button_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 104, 521, 191);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(172, 36, 214, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		Label label_1 = new Label("Nome: ");
+		label_1.setBounds(10, 36, 62, 22);
+		panel.add(label_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(172, 76, 214, 20);
+		panel.add(textField_1);
+		
+		Label label_2 = new Label("C\u00F3digo Identificador:");
+		label_2.setBounds(10, 76, 138, 22);
+		panel.add(label_2);
 	}
 }

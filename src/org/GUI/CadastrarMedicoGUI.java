@@ -25,6 +25,7 @@ import org.Classes.Arquivo;
 import org.Classes.Atendente;
 import org.Classes.Medico;
 import org.Classes.Paciente;
+import javax.swing.JComboBox;
 
 public class CadastrarMedicoGUI extends JDialog {
 
@@ -248,12 +249,12 @@ public class CadastrarMedicoGUI extends JDialog {
 		JLabel lblPlanosDeSade = new JLabel("Planos de Sa\u00FAde");
 		lblPlanosDeSade.setForeground(new Color(102, 102, 102));
 		lblPlanosDeSade.setFont(new Font("Dialog", Font.PLAIN, 15));
-		lblPlanosDeSade.setBounds(279, 381, 119, 14);
+		lblPlanosDeSade.setBounds(256, 385, 119, 14);
 		panel.add(lblPlanosDeSade);
 		
-		JButton button = new JButton("Adicionar");
-		button.setBounds(408, 376, 89, 23);
-		panel.add(button);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(373, 383, 112, 20);
+		panel.add(comboBox);
 
 	}
 }
