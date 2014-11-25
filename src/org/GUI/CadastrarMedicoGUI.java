@@ -24,11 +24,10 @@ import javax.swing.border.EmptyBorder;
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
 import org.Classes.Medico;
-<<<<<<< HEAD
-=======
+
 import org.Classes.Paciente;
 import javax.swing.JComboBox;
->>>>>>> 33dead75b051ae553174d2feb76bdce1fc383a82
+
 
 public class CadastrarMedicoGUI extends JDialog {
 
