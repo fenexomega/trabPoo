@@ -113,11 +113,13 @@ public class LoginGUI extends JFrame
 						AtendenteGUI gui = AtendenteGUI.GetInstance();
 						gui.setVisible(true);
 						dispose();
+						
 						return;
 					}
 					if(classe instanceof Medico)
 					{
 						MedicoGUI gui = new MedicoGUI();
+						gui.setNomeMedico(((Medico) classe).getNome());
 						gui.setVisible(true);
 						dispose();
 						return;
@@ -125,9 +127,9 @@ public class LoginGUI extends JFrame
 					}
 					if(classe instanceof Gerente)
 					{
-						MedicoGUI gui = new MedicoGUI();
-						gui.setVisible(true);
-						dispose();
+//						MedicoGUI gui = new MedicoGUI();
+//						gui.setVisible(true);
+//						dispose();
 						return;
 
 					}

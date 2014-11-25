@@ -28,6 +28,14 @@ public class MedicoGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
+	private String nomeMedico = "Dr. Fulano";
+	private JLabel lblNewLabel_1;
+	
+
+	public void setNomeMedico(String nomeMedico)
+	{
+		lblNewLabel_1.setText(nomeMedico);
+	}
 
 	/**
 	 * Launch the application.
@@ -84,7 +92,7 @@ public class MedicoGUI extends JFrame {
 		textField.setBounds(554, 187, 282, 27);
 		panel.add(textField);
 		
-		JLabel lblNewLabel_1 = new JLabel("Dr. Fulano");
+		lblNewLabel_1 = new JLabel(nomeMedico);
 		lblNewLabel_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(745, 139, 130, 14);
