@@ -31,6 +31,7 @@ import javax.swing.JTable;
 
 import org.Classes.Arquivo;
 import org.Classes.Paciente;
+import org.GUI.util.ErrorGUI;
 
 import java.awt.Label;
 import java.awt.Font;
@@ -129,10 +130,10 @@ public class AtendenteGUI extends JFrame {
 				if(table.getSelectedRow() == -1)
 				{
 					//GERAR ERRO, nenhuma linha foi selecionada
-					JOptionPane.showMessageDialog(contentPane, "Nenhuma linha foi selecionada");
+					ErrorGUI.MostrarErro(contentPane, "Nenhuma linha foi selecionada");
 				}
 				else
-					JOptionPane.showMessageDialog(contentPane,table.getModel().getValueAt(table.getSelectedRow(), 1));
+					ErrorGUI.MostrarErro(contentPane,table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
 			}
 		});
 		button_3.setBackground(SystemColor.desktop);

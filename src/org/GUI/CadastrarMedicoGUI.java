@@ -24,13 +24,13 @@ import org.Classes.Medico;
 public class CadastrarMedicoGUI extends JDialog {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtEndereco;
+	private JTextField txtTelefone;
+	private JTextField txtNome;
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
 	private JTextField txtCRM;
-	private JTextField textField;
+	private JTextField txtEspecialidades;
 
 	/**
 	 * Launch the application.
@@ -70,10 +70,10 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblUsername.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		lblUsername.setForeground(new Color(102, 102, 102));
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(148, 279, 349, 29);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtEndereco = new JTextField();
+		txtEndereco.setBounds(148, 279, 349, 29);
+		panel.add(txtEndereco);
+		txtEndereco.setColumns(10);
 		
 		JLabel lblEndereo = new JLabel("Senha:");
 		lblEndereo.setBounds(19, 205, 85, 14);
@@ -81,21 +81,21 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEndereo.setForeground(new Color(102, 102, 102));
 		lblEndereo.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
-		JLabel lblComplemento = new JLabel("Complemento:");
+		JLabel lblComplemento = new JLabel("Telefone:");
 		lblComplemento.setBounds(19, 244, 119, 14);
 		panel.add(lblComplemento);
 		lblComplemento.setForeground(new Color(102, 102, 102));
 		lblComplemento.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(148, 238, 349, 29);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(148, 238, 349, 29);
+		panel.add(txtTelefone);
+		txtTelefone.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(148, 115, 349, 29);
-		panel.add(textField_3);
+		txtNome = new JTextField();
+		txtNome.setColumns(10);
+		txtNome.setBounds(148, 115, 349, 29);
+		panel.add(txtNome);
 		
 		JLabel label_1 = new JLabel("Nome: ");
 		label_1.setForeground(new Color(102, 102, 102));
@@ -178,6 +178,8 @@ public class CadastrarMedicoGUI extends JDialog {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				Medico m = new Medico();
+				String nome = txtNome.getText();
+				String telefone = txtTelefone.getText();
 			}
 		});
 		btnSalvar.setBackground(new Color(0, 128, 128));
@@ -212,9 +214,9 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEspecialidade.setBounds(19, 375, 119, 14);
 		panel.add(lblEspecialidade);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(148, 360, 349, 29);
-		panel.add(textField);
+		txtEspecialidades = new JTextField();
+		txtEspecialidades.setColumns(10);
+		txtEspecialidades.setBounds(148, 360, 349, 29);
+		panel.add(txtEspecialidades);
 	}
 }
