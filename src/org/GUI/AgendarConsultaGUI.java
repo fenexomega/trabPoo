@@ -43,6 +43,7 @@ public class AgendarConsultaGUI extends JDialog {
 	private TextField textField_3;
 	private JComboBox<Plano_De_Saude> comboBoxPlan;
 	private JComboBox<Especialidade> comboBoxEsp;
+	private JCalendar calendar;
 	
 	private void ModificarTabelaMedicosPorEspecialidade(Especialidade esp)
 	{
@@ -171,6 +172,11 @@ public class AgendarConsultaGUI extends JDialog {
 		});
 		
 		JButton button_1 = new JButton("Salvar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
@@ -243,7 +249,7 @@ public class AgendarConsultaGUI extends JDialog {
 		panel_2.setBounds(20, 47, 227, 193);
 		panel_1.add(panel_2);
 		
-		JCalendar calendar = new JCalendar();
+		calendar = new JCalendar();
 		panel_2.add(calendar);
 		
 
