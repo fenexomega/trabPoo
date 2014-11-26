@@ -78,6 +78,14 @@ public class AtendenteGUI extends JFrame {
 			listaStringsMedicos[i++][3] = "";
 		}
 		
+		tab_medico.setModel(new DefaultTableModel (
+				
+				listaStringsMedicos,
+				new String[] {
+						"Nome", "CRM", "Horario"
+				}	
+		));
+		
 	}
 	public void AtualizarTabelaPacientes()
 	{
@@ -95,6 +103,13 @@ public class AtendenteGUI extends JFrame {
 			listaStringsPacientes[i++][2] = p.getEndereco();	
 		}
 		
+		tab_paciente.setModel(new DefaultTableModel (
+				
+				listaStringsPacientes,
+				new String[] {
+						"Nome", "CPF", "Endereço"
+				}	
+		));
 	}
 
 	static public AtendenteGUI GetInstance()
@@ -200,8 +215,7 @@ public class AtendenteGUI extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/inicial_background.png")));
 		panel.add(lblNewLabel);
 		contentPane.setLayout(gl_contentPane);
-		AtualizarTabelaPacientes();
-		AtualizarTabelaMedicos();
+		
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 242, 676, 420);
@@ -218,13 +232,7 @@ public class AtendenteGUI extends JFrame {
 		tab_paciente = new JTable();
 		scrollPane_1.setViewportView(tab_paciente);
 		
-		tab_paciente.setModel(new DefaultTableModel (
-				
-				listaStringsPacientes,
-				new String[] {
-						"Nome", "CPF", "Endereço"
-				}	
-		));
+		
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Médicos", null, panel_2, null);
@@ -276,6 +284,9 @@ public class AtendenteGUI extends JFrame {
 		btnCriarEspecialidade.setBackground(new Color(0, 153, 204));
 		btnCriarEspecialidade.setBounds(696, 467, 185, 54);
 		panel.add(btnCriarEspecialidade);
+		
+		AtualizarTabelaPacientes();
+		AtualizarTabelaMedicos();
 			
 	}
 }

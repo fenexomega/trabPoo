@@ -161,6 +161,17 @@ public class CriarPacienteGUI extends JDialog
 		button_1.setBackground(new Color(0, 128, 128));
 		button_1.setBounds(287, 315, 144, 43);
 		contentPanel.add(button_1);
+		
+		txtTelefone = new JTextField();
+		txtTelefone.setColumns(10);
+		txtTelefone.setBounds(114, 261, 320, 29);
+		contentPanel.add(txtTelefone);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setForeground(Color.GRAY);
+		lblTelefone.setFont(new Font("Dialog", Font.PLAIN, 15));
+		lblTelefone.setBounds(10, 268, 114, 16);
+		contentPanel.add(lblTelefone);
 		setTitle("Criar Paciente");
 		setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 	}
