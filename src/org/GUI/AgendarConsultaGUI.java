@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,17 +19,19 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.Classes.Arquivo;
+import org.Classes.Atendente;
+import org.Classes.Especialidade;
+import org.Classes.Medico;
 import org.Classes.Plano_De_Saude;
 
 import com.toedter.calendar.JCalendar;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class AgendarConsultaGUI extends JDialog {
 
@@ -39,7 +42,46 @@ public class AgendarConsultaGUI extends JDialog {
 	private String[][] listaStringsMedicos;
 	private TextField textField_3;
 	private JComboBox<Plano_De_Saude> comboBoxPlan;
+	private JComboBox<Especialidade> comboBoxEsp;
 	
+	private void ModificarTabelaMedicosPorEspecialidade(Especialidade esp)
+	{
+		List<Medico> medicosDaEspecialidade = Atendente.getMedicosPorEspecialidade(esp);
+		
+		listaStringsMedicos = new String[medicosDaEspecialidade.size()][2];
+		
+		int i = 0;
+		for (Medico medico : medicosDaEspecialidade)
+		{
+			listaStringsMedicos[i][0] = medico.getNome();
+			listaStringsMedicos[i++][1] = getDiasDaSemana(medico);
+		}
+		
+		table.setModel(new DefaultTableModel (
+				
+				listaStringsMedicos,
+				new String[] {
+						"Nome", "Horario"
+				}	
+		));
+	}
+	
+	private String getDiasDaSemana(Medico medico)
+	{
+		// TODO Auto-generated method stub
+		
+		String str = new String();
+		
+		int s = 2;
+		for (int i = 0; i < medico.getDiaDaSemana().length; i++)
+		{
+			if(medico.getDiaDaSemana()[i])
+				str += s++ + "ª, ";
+		}
+		
+		return str;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -114,9 +156,19 @@ public class AgendarConsultaGUI extends JDialog {
 		lblMdicos.setForeground(Color.GRAY);
 		lblMdicos.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
 		
-		JComboBox<?> comboBoxMedi = new JComboBox<Object>();
-		comboBoxMedi.setBounds(314, 77, 128, 20);
-		panel_1.add(comboBoxMedi);
+		comboBoxEsp = new JComboBox<Especialidade>();
+		comboBoxEsp.setBounds(314, 77, 128, 20);
+		panel_1.add(comboBoxEsp);
+		comboBoxEsp.addItem(null);
+		comboBoxEsp.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent arg0)
+			{
+				if(arg0.getStateChange() == arg0.SELECTED)
+					ModificarTabelaMedicosPorEspecialidade((Especialidade) comboBoxEsp.getSelectedItem());
+			}
+		});
 		
 		JButton button_1 = new JButton("Salvar");
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));
@@ -155,10 +207,15 @@ public class AgendarConsultaGUI extends JDialog {
 			comboBoxPlan.addItem(plano);
 		}
 		
+		for (Especialidade esp : Arquivo.getListaEspecialidades())
+		{
+			comboBoxEsp.addItem(esp);
+		}
 
 		textField_3 = new TextField();
 		textField_3.setBounds(86, 275, 134, 22);
-
+		textField_3.setEnabled(false);
+		
 		panel_1.add(textField_3);
 		
 		JLabel lblValor = new JLabel("Valor:");
@@ -203,6 +260,9 @@ public class AgendarConsultaGUI extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 264, 226);
 		panel_3.add(scrollPane);
+		
+		
+		
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
