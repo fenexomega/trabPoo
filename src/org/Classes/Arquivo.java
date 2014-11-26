@@ -100,7 +100,7 @@ public class Arquivo
 			
 			f_out = new FileOutputStream(DIR_FILES + "consultaplano.ser");
 			o_out = new ObjectOutputStream(f_out);
-			o_out.writeObject(listaConsultasParticulares);
+			o_out.writeObject(listaConsultasPlano);
 			o_out.close();
 			f_out.close();
 			

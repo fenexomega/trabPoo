@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -27,12 +28,14 @@ import javax.swing.table.DefaultTableModel;
 
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
+import org.Classes.Consulta_Particular;
+import org.Classes.Consulta_Plano;
 import org.Classes.Especialidade;
 import org.Classes.Medico;
 import org.Classes.Plano_De_Saude;
+import org.GUI.util.ErrorGUI;
 
 import com.toedter.calendar.JCalendar;
-
 public class AgendarConsultaGUI extends JDialog {
 
 	private JPanel contentPane;
@@ -44,6 +47,8 @@ public class AgendarConsultaGUI extends JDialog {
 	private JComboBox<Plano_De_Saude> comboBoxPlan;
 	private JComboBox<Especialidade> comboBoxEsp;
 	private JCalendar calendar;
+	private JCheckBox chckbxParticular;
+	private JComboBox<Integer> comboHora;
 	
 	private void ModificarTabelaMedicosPorEspecialidade(Especialidade esp)
 	{
@@ -102,7 +107,7 @@ public class AgendarConsultaGUI extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public AgendarConsultaGUI(String CPFpaciente) {
+	public AgendarConsultaGUI(final String CPFpaciente) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 792, 651);
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -141,10 +146,6 @@ public class AgendarConsultaGUI extends JDialog {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		TextField textField_2 = new TextField();
-		textField_2.setBounds(80, 381, 55, 22);
-		panel_1.add(textField_2);
-		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setForeground(Color.GRAY);
 		lblHora.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
@@ -161,6 +162,9 @@ public class AgendarConsultaGUI extends JDialog {
 		comboBoxEsp.setBounds(314, 77, 128, 20);
 		panel_1.add(comboBoxEsp);
 		comboBoxEsp.addItem(null);
+		
+	
+		
 		comboBoxEsp.addItemListener(new ItemListener() {
 			
 			@Override
@@ -174,6 +178,82 @@ public class AgendarConsultaGUI extends JDialog {
 		JButton button_1 = new JButton("Salvar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(chckbxParticular.isSelected())
+				{
+					Consulta_Particular cnp = new Consulta_Particular();
+
+					Calendar cld = (Calendar) calendar.getCalendar().clone();
+					
+					
+					cld.set(Calendar.HOUR, 
+							Integer.parseInt(comboHora.getSelectedItem().toString()) - 12
+							);
+
+					
+					
+					
+					Medico m = Atendente.getMedicoPorString(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+					boolean[] dds = m.getDiaDaSemana();
+					
+					
+					if(!dds[cld.get(Calendar.DAY_OF_WEEK)-1])
+					{
+						ErrorGUI.MostrarErro(getContentPane(), "O médico escolhido não atendente neste dia da semana");
+						return;
+					}
+					
+				
+					cnp.setData(cld);
+					cnp.setPaciente(Atendente.getPacientePorCpf(CPFpaciente));
+					cnp.setMedico(m);
+					
+					cnp.setPreco(Double.parseDouble(textField_3.getText()));
+					Atendente.Cadastrar(cnp);
+					
+				}
+				else
+				{
+					Consulta_Plano cnp = new Consulta_Plano();
+					
+					Calendar cld = (Calendar) calendar.getCalendar().clone();
+					
+					
+					cld.set(Calendar.HOUR, 
+							Integer.parseInt(comboHora.getSelectedItem().toString()) - 12
+							);
+
+					
+					
+					
+					Medico m = Atendente.getMedicoPorString(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+					boolean[] dds = m.getDiaDaSemana();
+					
+					
+					if(!dds[cld.get(Calendar.DAY_OF_WEEK)-1])
+					{
+						ErrorGUI.MostrarErro(getContentPane(), "O médico escolhido não atendente neste dia da semana");
+						return;
+					}
+					
+				
+					cnp.setData(cld);
+					cnp.setPaciente(Atendente.getPacientePorCpf(CPFpaciente));
+					cnp.setMedico(m);
+					
+					cnp.setPlano((Plano_De_Saude) comboBoxPlan.getSelectedItem());
+					Atendente.Cadastrar(cnp);
+					
+				
+
+
+				}
+				
+				ErrorGUI.MostrarErro(getContentPane(), "Consulta Marcada com Sucesso");
+				dispose();
+				
+
+				
+				
 				
 			}
 		});
@@ -254,7 +334,7 @@ public class AgendarConsultaGUI extends JDialog {
 		
 
 		
-		JCheckBox chckbxParticular = new JCheckBox("Particular");
+		chckbxParticular = new JCheckBox("Particular");
 		chckbxParticular.setBounds(30, 246, 129, 23);
 		panel_1.add(chckbxParticular);
 		
@@ -280,6 +360,15 @@ public class AgendarConsultaGUI extends JDialog {
 						"Nome", "Horario"
 				}	
 		));
+		
+		comboHora = new JComboBox<Integer>();
+		comboHora.setBounds(92, 377, 128, 20);
+		panel_1.add(comboHora);
+		
+		
+		
+		for(int i = 8; i < 18; i++)
+			comboHora.addItem(i);
 		chckbxParticular.addItemListener(new ItemListener() {
 			
 			@Override
@@ -298,5 +387,9 @@ public class AgendarConsultaGUI extends JDialog {
 				}
 			}
 		});
+		Calendar cld = calendar.getCalendar();
+		cld.set(Calendar.HOUR, Calendar.AM);
+		cld.set(Calendar.MINUTE, 0);
+		cld.set(Calendar.SECOND, 0);
 	}
 }

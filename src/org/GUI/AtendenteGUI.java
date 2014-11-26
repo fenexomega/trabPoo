@@ -124,6 +124,7 @@ public class AtendenteGUI extends JFrame {
 	 * Create the frame.
 	 */
 	private AtendenteGUI() {
+		System.out.println(Arquivo.getListaConsultasPlano().size());
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AtendenteGUI.class.getResource("/Images/logo-01.png")));
 		setLocationRelativeTo(null);

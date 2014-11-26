@@ -236,8 +236,9 @@ public class CadastrarMedicoGUI extends JDialog {
 					return;
 				}
 				
-				boolean[] DiasDaSemana = new boolean[6];
-				for (int i = 0; i < chckbxBoxes.length; i++)
+				boolean[] DiasDaSemana = new boolean[7];
+				DiasDaSemana[0] = false;
+				for (int i = 1; i < chckbxBoxes.length; i++)
 				{
 					DiasDaSemana[i] = chckbxBoxes[i].isSelected();
 				}
