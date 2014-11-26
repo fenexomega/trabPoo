@@ -1,16 +1,16 @@
 package org.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
-public class ListarConsultasDiarias extends JFrame {
+public class ListarConsultasDiariasGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -23,7 +23,7 @@ public class ListarConsultasDiarias extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ListarConsultasDiarias frame = new ListarConsultasDiarias();
+					ListarConsultasDiariasGUI frame = new ListarConsultasDiariasGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,8 +35,9 @@ public class ListarConsultasDiarias extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ListarConsultasDiarias() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public ListarConsultasDiariasGUI() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 395);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

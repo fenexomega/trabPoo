@@ -56,6 +56,12 @@ public class GerenteGUI extends JFrame {
 		contentPane.add(button_1);
 		
 		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListarConsultasDiariasGUI gui = new ListarConsultasDiariasGUI();
+				gui.setVisible(true);
+			}
+		});
 		button.setIcon(new ImageIcon(GerenteGUI.class.getResource("/Images/seach-01.png")));
 		button.setBackground(SystemColor.desktop);
 		button.setBounds(227, 211, 144, 111);
