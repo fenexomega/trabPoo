@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
-
 import java.awt.Color;
 
 import javax.swing.JButton;
@@ -30,6 +29,7 @@ import org.Classes.Arquivo;
 import org.Classes.Medico;
 import org.Classes.Paciente;
 import org.GUI.util.ErrorGUI;
+
 
 
 
@@ -65,6 +65,23 @@ public class AtendenteGUI extends JFrame {
 			}
 		});
 	}
+	
+	private String getDiasDaSemana(Medico medico)
+	{
+		// TODO Auto-generated method stub
+		
+		String str = new String();
+		
+		int s = 2;
+		for (int i = 0; i < medico.getDiaDaSemana().length; i++)
+		{
+			if(medico.getDiaDaSemana()[i])
+				str += s++ + "ª, ";
+		}
+		
+		return str;
+	}
+	
 	public void AtualizarTabelaMedicos(){
 		Arquivo.LerArquivos();
 		listaStringsMedicos = new String[Arquivo.getListaMedicos().size()][4];
@@ -74,8 +91,8 @@ public class AtendenteGUI extends JFrame {
 		{
 
 			listaStringsMedicos[i][0] = p.getNome();
-			listaStringsMedicos[i][2] = p.getCRM();
-			listaStringsMedicos[i++][3] = "";
+			listaStringsMedicos[i][1] = p.getCRM();
+			listaStringsMedicos[i++][2] = getDiasDaSemana(p);
 		}
 		
 		tab_medico.setModel(new DefaultTableModel (

@@ -58,8 +58,8 @@ public class GerenteGUI extends JFrame {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ListarConsultasDiariasGUI gui = new ListarConsultasDiariasGUI();
-				gui.setVisible(true);
+//				ListarConsultasDiariasGUI gui = new ListarConsultasDiariasGUI();
+//				gui.setVisible(true);
 			}
 		});
 		button.setIcon(new ImageIcon(GerenteGUI.class.getResource("/Images/seach-01.png")));

@@ -153,12 +153,6 @@ public class LoginGUI extends JFrame
 						return;
 
 					}
-					
-					
-				
-					
-					
-					
 					return;
 
 				}

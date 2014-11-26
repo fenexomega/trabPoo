@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,22 +17,40 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import org.Classes.Arquivo;
-import org.Classes.Paciente;
+import org.Classes.*;
+
+import java.lang.String;
 
 public class MedicoGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTable tableConsultas;
 	private String nomeMedico = "Dr. Fulano";
 	private JLabel lblNewLabel_1;
-	private JTable table_1;
+	private JTable tablePacientes;
+	private String[][] nomeConsultas;
 	
-
+	private void atualizarListaDeConsulta(String str)
+	{
+		// TODO Auto-generated method stub
+		Paciente p = Atendente.getPacientePorCpf(str);
+		List<Consulta> listaConsutas = Atendente.getConsultasPorPaciente(p);
+		
+		int i = 0;
+		nomeConsultas = new String[listaConsutas.size()][2];
+		for (Consulta consulta : listaConsutas)
+		{
+			nomeConsultas[i][0] = consulta.getMedico().toString();
+			nomeConsultas[i++][1] = consulta.getData().getTime().toString().substring(3, 20);
+		}
+		
+	}
+	
 	public void setNomeMedico(String nomeMedico)
 	{
 		lblNewLabel_1.setText(nomeMedico);
@@ -139,16 +157,14 @@ public class MedicoGUI extends JFrame {
 		scrollPane.setBounds(554, 187, 326, 277);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		tableConsultas = new JTable();
+		scrollPane.setViewportView(tableConsultas);
 	
-		table.setModel(new DefaultTableModel (
-				
-				getTabelaPacientes(),
-				new String[] {
-						"Medico", "Dia"
-				}	
-		));
+		
+		
+		
+		
+		
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/salvar-01.png")));
@@ -178,16 +194,36 @@ public class MedicoGUI extends JFrame {
 		scrollPane_1.setBounds(10, 187, 536, 485);
 		panel.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
+		tablePacientes = new JTable();
+		scrollPane_1.setViewportView(tablePacientes);
 		
-		table_1.setModel(new DefaultTableModel (
+		tablePacientes.setModel(new DefaultTableModel (
 				
 				getTabelaPacientes(),
 				new String[] {
 						"Nome", "CPF"
 				}	
 		));
+		
+		tablePacientes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	            // do some actions here, for example
+	            
+	        	// print first column value from selected row
+	        	
+				atualizarListaDeConsulta(tablePacientes.getValueAt(tablePacientes.getSelectedRow(), 1).toString());
+
+	        	tableConsultas.setModel(new DefaultTableModel (
+	    				
+	    				nomeConsultas,
+	    				new String[] {
+	    						"Medico", "Dia"
+	    				}	
+	    		));
+	        }
+
+			
+	    });
 		
 		JButton btnNovaObservao = new JButton("Criar nova Observa\u00E7\u00E3o");
 		btnNovaObservao.setForeground(Color.WHITE);
