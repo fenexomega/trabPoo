@@ -242,19 +242,13 @@ public class AgendarConsultaGUI extends JDialog {
 					
 					cnp.setPlano((Plano_De_Saude) comboBoxPlan.getSelectedItem());
 					Atendente.Cadastrar(cnp);
-					
-				
 
 
 				}
 				
 				ErrorGUI.MostrarErro(getContentPane(), "Consulta Marcada com Sucesso");
 				dispose();
-				
 
-				
-				
-				
 			}
 		});
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));

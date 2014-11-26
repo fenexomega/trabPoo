@@ -34,12 +34,13 @@ public class MedicoGUI extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JTable tablePacientes;
 	private String[][] nomeConsultas;
+	private List<Consulta> listaConsutas;
 	
 	private void atualizarListaDeConsulta(String str)
 	{
 		// TODO Auto-generated method stub
 		Paciente p = Atendente.getPacientePorCpf(str);
-		List<Consulta> listaConsutas = Atendente.getConsultasPorPaciente(p);
+		listaConsutas = Atendente.getConsultasPorPaciente(p);
 		
 		int i = 0;
 		nomeConsultas = new String[listaConsutas.size()][2];
@@ -161,11 +162,6 @@ public class MedicoGUI extends JFrame {
 		scrollPane.setViewportView(tableConsultas);
 	
 		
-		
-		
-		
-		
-		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/salvar-01.png")));
 		btnSalvar.setForeground(new Color(255, 255, 255));
@@ -226,6 +222,14 @@ public class MedicoGUI extends JFrame {
 	    });
 		
 		JButton btnNovaObservao = new JButton("Criar nova Observa\u00E7\u00E3o");
+		btnNovaObservao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Consulta c = listaConsutas.get(tablePacientes.getSelectedRow()-1);
+				CriarObservacoes gui = new CriarObservacoes(c);
+				gui.setVisible(true);
+				
+			}
+		});
 		btnNovaObservao.setForeground(Color.WHITE);
 		btnNovaObservao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
 		btnNovaObservao.setBackground(new Color(0, 128, 128));

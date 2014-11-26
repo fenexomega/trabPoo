@@ -1,21 +1,34 @@
 package org.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 
-public class CriarObservacoes extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+
+import org.Classes.Arquivo;
+import org.Classes.Consulta;
+import org.Classes.Consulta_Particular;
+import org.GUI.util.ErrorGUI;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class CriarObservacoes extends JDialog {
 
 	private JPanel contentPane;
+	private JTextPane textPane;
+	private JTextPane textPane_1;
+	private JTextPane textPane_2;
+	private Consulta consulta;
+	
 
 	/**
 	 * Launch the application.
@@ -24,7 +37,7 @@ public class CriarObservacoes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CriarObservacoes frame = new CriarObservacoes();
+					CriarObservacoes frame = new CriarObservacoes(new Consulta_Particular());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,8 +49,9 @@ public class CriarObservacoes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CriarObservacoes() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public CriarObservacoes(Consulta c) {
+		this.consulta = c;
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 546, 637);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,17 +64,21 @@ public class CriarObservacoes extends JFrame {
 		panel.setBounds(0, 41, 530, 485);
 		contentPane.add(panel);
 		
-		JTextPane textPane = new JTextPane();
+		textPane = new JTextPane();
 		textPane.setBounds(10, 30, 506, 117);
 		panel.add(textPane);
 		
-		JTextPane textPane_1 = new JTextPane();
+		textPane_1 = new JTextPane();
 		textPane_1.setBounds(10, 183, 506, 125);
 		panel.add(textPane_1);
 		
-		JTextPane textPane_2 = new JTextPane();
+		textPane_2 = new JTextPane();
 		textPane_2.setBounds(10, 344, 506, 117);
 		panel.add(textPane_2);
+		
+		textPane.setText(c.getTexto_qxa());
+		textPane_1.setText(c.getText_prediscricoes());
+		textPane_2.setText(c.getExames_solicitados());
 		
 		JLabel label = new JLabel("Queixas do paciente:");
 		label.setForeground(Color.WHITE);
@@ -81,6 +99,21 @@ public class CriarObservacoes extends JFrame {
 		panel.add(label_2);
 		
 		JButton button = new JButton("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				consulta.setTexto_qxa(textPane.getText());
+				consulta.setText_prediscricoes(textPane_1.getText());
+				consulta.setExames_solicitados(textPane_2.getText());
+				
+				Arquivo.GravarArquivo();
+				
+				ErrorGUI.MostrarErro(getContentPane(), "Gravado com sucesso");
+				
+				dispose();
+				
+			}
+		});
 		button.setIcon(new ImageIcon(CriarObservacoes.class.getResource("/Images/salvar-01.png")));
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
@@ -88,6 +121,11 @@ public class CriarObservacoes extends JFrame {
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Cancelar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		button_1.setIcon(new ImageIcon(CriarObservacoes.class.getResource("/Images/cancelar-01.png")));
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
