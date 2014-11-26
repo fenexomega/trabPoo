@@ -267,6 +267,12 @@ public class AtendenteGUI extends JFrame {
 		panel.add(btnNewButton_1);
 		
 		JButton btnVerificarDias = new JButton("Verificar dias disponiveis");
+		btnVerificarDias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VerificarDiasGUI verd = new VerificarDiasGUI();
+				verd.setVisible(true);
+			}
+		});
 		btnVerificarDias.setForeground(Color.WHITE);
 		btnVerificarDias.setBackground(new Color(0, 153, 204));
 		btnVerificarDias.setBounds(696, 532, 185, 54);

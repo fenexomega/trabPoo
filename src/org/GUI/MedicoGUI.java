@@ -7,11 +7,13 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -99,6 +101,19 @@ public class MedicoGUI extends JFrame {
 		lblNewLabel_1.setBounds(745, 139, 130, 14);
 		panel.add(lblNewLabel_1);
 		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {	
+				LoginGUI lg = new LoginGUI();
+				lg.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBackground(SystemColor.desktop);
+		btnNewButton.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/sair-01.png")));
+		btnNewButton.setBounds(762, 44, 97, 84);
+		panel.add(btnNewButton);
+		
 		JButton btnListar = new JButton("Listar atendimentos");
 		btnListar.setForeground(new Color(255, 255, 255));
 		btnListar.setBackground(new Color(0, 128, 128));
@@ -115,11 +130,6 @@ public class MedicoGUI extends JFrame {
 		label.setBounds(0, 0, 306, 138);
 		panel.add(label);
 		label.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/logo-01.png")));
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(774, 21, 89, 126);
-		panel.add(label_1);
-		label_1.setIcon(new ImageIcon(MedicoGUI.class.getResource("/Images/sair-01.png")));
 		
 		JLabel label_2 = new JLabel("");
 		label_2.setBounds(0, 0, 885, 176);
