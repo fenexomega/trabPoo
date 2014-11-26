@@ -1,32 +1,35 @@
 package org.GUI;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import java.awt.TextField;
-import java.awt.Button;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
-import java.util.Calendar;
-import com.toedter.calendar.JCalendar;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
-public class AgendarConsultaGUI extends JFrame {
+import org.Classes.Arquivo;
+import org.Classes.Plano_De_Saude;
+
+import com.toedter.calendar.JCalendar;
+
+public class AgendarConsultaGUI extends JDialog {
 
 	private JPanel contentPane;
-
+	private JLabel lblCpfDoPaciente;
+	private JLabel lblCpf;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -49,6 +52,7 @@ public class AgendarConsultaGUI extends JFrame {
 	public AgendarConsultaGUI(String CPFpaciente) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 792, 577);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -100,9 +104,9 @@ public class AgendarConsultaGUI extends JFrame {
 		lblMdicos.setForeground(Color.GRAY);
 		lblMdicos.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(30, 299, 128, 20);
-		panel_1.add(comboBox);
+		JComboBox<?> comboBoxMedi = new JComboBox<Object>();
+		comboBoxMedi.setBounds(30, 299, 128, 20);
+		panel_1.add(comboBoxMedi);
 		
 		JButton button_1 = new JButton("Salvar");
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));
@@ -129,9 +133,14 @@ public class AgendarConsultaGUI extends JFrame {
 		lblPlanoDeSade.setBounds(550, 119, 144, 29);
 		panel_1.add(lblPlanoDeSade);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(550, 147, 128, 20);
-		panel_1.add(comboBox_1);
+		JComboBox<Plano_De_Saude> comboBoxPlan = new JComboBox<Plano_De_Saude>();
+		comboBoxPlan.setBounds(550, 147, 128, 20);
+		panel_1.add(comboBoxPlan);
+		
+		for (Plano_De_Saude plano : Arquivo.getListaPlanos())
+		{
+			comboBoxPlan.addItem(plano);
+		}
 		
 		TextField textField_3 = new TextField();
 		textField_3.setBounds(602, 85, 134, 22);
@@ -143,15 +152,18 @@ public class AgendarConsultaGUI extends JFrame {
 		lblValor.setBounds(550, 78, 55, 29);
 		panel_1.add(lblValor);
 		
-		JLabel lblNewLabel = new JLabel("Nome do paciente");
-		lblNewLabel.setBounds(348, 15, 175, 14);
-		panel_1.add(lblNewLabel);
 		
-		JLabel lblCpfDoPaciente = new JLabel("CPF do paciente:");
+
+		
+		lblCpfDoPaciente = new JLabel("CPF do paciente:");
 		lblCpfDoPaciente.setBounds(10, 7, 148, 29);
 		panel_1.add(lblCpfDoPaciente);
 		lblCpfDoPaciente.setForeground(Color.GRAY);
 		lblCpfDoPaciente.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
+		
+		lblCpf = new JLabel(CPFpaciente);
+		lblCpf.setBounds(170, 15, 148, 15);
+		panel_1.add(lblCpf);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
@@ -162,9 +174,7 @@ public class AgendarConsultaGUI extends JFrame {
 		JCalendar calendar = new JCalendar();
 		panel_2.add(calendar);
 		
-		JLabel lblCpf = new JLabel("cpf");
-		lblCpf.setBounds(170, 15, 70, 15);
-		panel_1.add(lblCpf);
+
 		
 		JCheckBox chckbxParticular = new JCheckBox("Particular");
 		chckbxParticular.setBounds(550, 56, 129, 23);

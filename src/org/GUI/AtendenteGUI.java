@@ -159,7 +159,11 @@ public class AtendenteGUI extends JFrame {
 					ErrorGUI.MostrarErro(contentPane, "Nenhuma linha foi selecionada");
 				}
 				else
-					ErrorGUI.MostrarErro(contentPane,tab_paciente.getModel().getValueAt(tab_paciente.getSelectedRow(), 1).toString());
+				{
+				
+					AgendarConsultaGUI gui = new AgendarConsultaGUI(tab_paciente.getModel().getValueAt(tab_paciente.getSelectedRow(), 1).toString());
+					gui.setVisible(true);
+				}
 			}
 		});
 		button_3.setBackground(SystemColor.desktop);
