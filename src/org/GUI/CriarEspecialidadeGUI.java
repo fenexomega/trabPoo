@@ -15,13 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.Classes.Atendente;
+import org.Classes.Especialidade;
+import org.GUI.util.ErrorGUI;
+
 
 public class CriarEspecialidadeGUI extends JDialog
 {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNome;
+	private JTextField txtCodigo;
 
 	/**
 	 * Launch the application.
@@ -65,6 +69,20 @@ public class CriarEspecialidadeGUI extends JDialog
 		JButton button = new JButton("Salvar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Especialidade p = new Especialidade(txtNome.getText(), txtCodigo.getText());
+				
+				if(!Atendente.Cadastrar(p))
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Já existe essa especialidade");
+					dispose();
+					return;
+				}
+				
+				ErrorGUI.MostrarErro(getContentPane(), "Cadastrado com sucesso");
+				
+				dispose();
+				return;
+
 				
 			}
 		});
@@ -89,19 +107,19 @@ public class CriarEspecialidadeGUI extends JDialog
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(172, 36, 214, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(172, 36, 214, 20);
+		panel.add(txtNome);
+		txtNome.setColumns(10);
 		
 		Label label_1 = new Label("Nome: ");
 		label_1.setBounds(10, 36, 62, 22);
 		panel.add(label_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(172, 76, 214, 20);
-		panel.add(textField_1);
+		txtCodigo = new JTextField();
+		txtCodigo.setColumns(10);
+		txtCodigo.setBounds(172, 76, 214, 20);
+		panel.add(txtCodigo);
 		
 		Label label_2 = new Label("C\u00F3digo Identificador:");
 		label_2.setBounds(10, 76, 138, 22);

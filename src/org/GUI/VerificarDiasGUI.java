@@ -59,10 +59,11 @@ public class VerificarDiasGUI extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(10, 146, 233, 178);
+		panel.setBounds(10, 146, 275, 191);
 		contentPane.add(panel);
 		
 		JCalendar calendar = new JCalendar();
+		calendar.setDecorationBordersVisible(true);
 		panel.add(calendar);
 	}
 }
