@@ -75,7 +75,7 @@ public class AtendenteGUI extends JFrame {
 
 			listaStringsMedicos[i][0] = p.getNome();
 			listaStringsMedicos[i][2] = p.getCRM();
-			listaStringsMedicos[i++][3] = p.getHorario();
+			listaStringsMedicos[i++][3] = "";
 		}
 		
 	}

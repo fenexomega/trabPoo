@@ -23,9 +23,12 @@ import javax.swing.border.EmptyBorder;
 
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
+import org.Classes.Especialidade;
 import org.Classes.Medico;
-
 import org.Classes.Paciente;
+import org.Classes.Plano_De_Saude;
+import org.Classes.Usuario;
+
 import javax.swing.JComboBox;
 
 
@@ -43,6 +46,8 @@ public class CadastrarMedicoGUI extends JDialog {
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
 	private JTextField txtCRM;
+	private JComboBox<String> cmbPlanos;
+	private JComboBox<String> cmbEspecialidade;
 
 	/**
 	 * Launch the application.
@@ -192,13 +197,17 @@ public class CadastrarMedicoGUI extends JDialog {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				Medico m =  new Medico(null, null, null, null, null, null, null);
+				Medico m =  new Medico(null, null, null, null, null);
+
+				Usuario u = new Usuario(txtUsername.getText(), pwdPassword.getText());
 				
 				m.setNome(txtNome.getText());
-				m.setUsername(txtUsername.getText());
-				m.setSenha(pwdPassword.getEchoChar());
+				m.setUsuario(u);
 				m.setCRM(txtCRM.getText());
 				m.setTelefone(txtTelefone.getText());
+				m.setEspecialidades(Atendente.getEspecialidadePorString(cmbEspecialidade.getSelectedItem().toString()));
+				
+				//TODO checar se o input não tá branco
 				
 				if(!Atendente.Cadastrar(m))
 				{
@@ -246,10 +255,6 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEspecialidade.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblEspecialidade.setBounds(19, 385, 119, 14);
 		panel.add(lblEspecialidade);
-
-		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.setBounds(148, 380, 89, 23);
-		panel.add(btnAdicionar);
 		
 		JLabel lblPlanosDeSade = new JLabel("Planos de Sa\u00FAde");
 		lblPlanosDeSade.setForeground(new Color(102, 102, 102));
@@ -258,9 +263,25 @@ public class CadastrarMedicoGUI extends JDialog {
 		panel.add(lblPlanosDeSade);
 		
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(373, 383, 112, 20);
-		panel.add(comboBox);
+		cmbPlanos = new JComboBox<String>();
+		cmbPlanos.setBounds(373, 383, 112, 20);
+		panel.add(cmbPlanos);
+		
+		for (Plano_De_Saude plano : Arquivo.getListaPlanos())
+		{
+			cmbPlanos.addItem(plano.getRazaoSocial());
+
+		}
+		
+		cmbEspecialidade = new JComboBox<String>();
+		cmbEspecialidade.setBounds(133, 382, 112, 20);
+		panel.add(cmbEspecialidade);
+		
+		for (Especialidade esp : Arquivo.getListaEspecialidades())
+		{
+			cmbEspecialidade.addItem(esp.getNome());
+
+		}
 
 	}
 }
