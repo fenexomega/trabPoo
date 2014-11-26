@@ -29,6 +29,7 @@ public class MedicoGUI extends JFrame {
 	private JTable table;
 	private String nomeMedico = "Dr. Fulano";
 	private JLabel lblNewLabel_1;
+	private JTable table_1;
 	
 
 	public void setNomeMedico(String nomeMedico)
@@ -136,7 +137,7 @@ public class MedicoGUI extends JFrame {
 				
 				getTabelaPacientes(),
 				new String[] {
-						"Nome", "CPF"
+						"Medico", "Dia"
 				}	
 		));
 		
@@ -147,42 +148,6 @@ public class MedicoGUI extends JFrame {
 		btnSalvar.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
 		btnSalvar.setBounds(554, 475, 156, 48);
 		panel.add(btnSalvar);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(51, 102, 102));
-		panel_1.setBounds(10, 187, 534, 485);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(10, 30, 506, 117);
-		panel_1.add(textPane);
-		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(10, 183, 506, 125);
-		panel_1.add(textPane_1);
-		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setBounds(10, 344, 506, 117);
-		panel_1.add(textPane_2);
-		
-		JLabel lblQueixasDoPaciente = new JLabel("Queixas do paciente:");
-		lblQueixasDoPaciente.setForeground(Color.WHITE);
-		lblQueixasDoPaciente.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblQueixasDoPaciente.setBounds(10, 5, 198, 14);
-		panel_1.add(lblQueixasDoPaciente);
-		
-		JLabel lblPrescriesDeMedicamentos = new JLabel("Prescri\u00E7\u00F5es de medicamentos:");
-		lblPrescriesDeMedicamentos.setForeground(Color.WHITE);
-		lblPrescriesDeMedicamentos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblPrescriesDeMedicamentos.setBounds(10, 158, 233, 14);
-		panel_1.add(lblPrescriesDeMedicamentos);
-		
-		JLabel lblExamesSolicitados = new JLabel("Exames solicitados:");
-		lblExamesSolicitados.setForeground(Color.WHITE);
-		lblExamesSolicitados.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		lblExamesSolicitados.setBounds(10, 319, 151, 14);
-		panel_1.add(lblExamesSolicitados);
 		
 		JLabel label_3 = new JLabel("");
 		label_3.setBounds(562, 150, 46, 14);
@@ -199,5 +164,27 @@ public class MedicoGUI extends JFrame {
 		});
 		btnLimparTudo.setBounds(713, 475, 166, 48);
 		panel.add(btnLimparTudo);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 187, 536, 485);
+		panel.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+		table_1.setModel(new DefaultTableModel (
+				
+				getTabelaPacientes(),
+				new String[] {
+						"Nome", "CPF"
+				}	
+		));
+		
+		JButton btnNovaObservao = new JButton("Criar nova Observa\u00E7\u00E3o");
+		btnNovaObservao.setForeground(Color.WHITE);
+		btnNovaObservao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+		btnNovaObservao.setBackground(new Color(0, 128, 128));
+		btnNovaObservao.setBounds(554, 582, 321, 48);
+		panel.add(btnNovaObservao);
 	}
 }
