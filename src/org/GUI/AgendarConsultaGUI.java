@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +37,8 @@ public class AgendarConsultaGUI extends JDialog {
 	private JLabel lblCpf;
 	private JTable table;
 	private String[][] listaStringsMedicos;
+	private TextField textField_3;
+	private JComboBox<Plano_De_Saude> comboBoxPlan;
 	
 	/**
 	 * Launch the application.
@@ -139,8 +143,9 @@ public class AgendarConsultaGUI extends JDialog {
 		lblPlanoDeSade.setBounds(30, 309, 144, 29);
 		panel_1.add(lblPlanoDeSade);
 		
-		JComboBox<Plano_De_Saude> comboBoxPlan = new JComboBox<Plano_De_Saude>();
-		comboBoxPlan.setBounds(30, 337, 128, 20);
+
+		 comboBoxPlan = new JComboBox<Plano_De_Saude>();
+		comboBoxPlan.setBounds(30, 343, 128, 20);
 		panel_1.add(comboBoxPlan);
 		
 		Arquivo.LerArquivos();
@@ -150,8 +155,10 @@ public class AgendarConsultaGUI extends JDialog {
 			comboBoxPlan.addItem(plano);
 		}
 		
-		TextField textField_3 = new TextField();
-		textField_3.setBounds(82, 275, 134, 22);
+
+		textField_3 = new TextField();
+		textField_3.setBounds(86, 275, 134, 22);
+
 		panel_1.add(textField_3);
 		
 		JLabel lblValor = new JLabel("Valor:");
@@ -207,5 +214,23 @@ public class AgendarConsultaGUI extends JDialog {
 						"Nome", "Horario"
 				}	
 		));
+		chckbxParticular.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				// TODO Auto-generated method stub
+				if(e.getStateChange() == ItemEvent.SELECTED)
+				{
+					textField_3.setEnabled(true);
+					comboBoxPlan.setEnabled(false);
+				}
+				else
+				{
+					textField_3.setEnabled(false);
+					comboBoxPlan.setEnabled(true);
+				}
+			}
+		});
 	}
 }
