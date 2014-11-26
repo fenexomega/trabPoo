@@ -49,6 +49,7 @@ public class CriarEspecialidadeGUI extends JDialog
 	public CriarEspecialidadeGUI()
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 557, 397);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -264,6 +264,13 @@ public class AtendenteGUI extends JFrame {
 		panel.add(btnVerificarDias);
 		
 		JButton btnCriarEspecialidade = new JButton("Criar Especialidades");
+		btnCriarEspecialidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CriarEspecialidadeGUI ce = new CriarEspecialidadeGUI();
+				ce.setVisible(true);
+				
+			}
+		});
 		btnCriarEspecialidade.setForeground(Color.WHITE);
 		btnCriarEspecialidade.setBackground(new Color(0, 153, 204));
 		btnCriarEspecialidade.setBounds(696, 467, 185, 54);
