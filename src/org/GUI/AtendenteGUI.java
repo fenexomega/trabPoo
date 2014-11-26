@@ -75,8 +75,16 @@ public class AtendenteGUI extends JFrame {
 
 			listaStringsMedicos[i][0] = p.getNome();
 			listaStringsMedicos[i][2] = p.getCRM();
-			listaStringsMedicos[i++][3] = p.getHorario();
+			listaStringsMedicos[i++][3] = "";
 		}
+		
+		tab_medico.setModel(new DefaultTableModel (
+				
+				listaStringsMedicos,
+				new String[] {
+						"Nome", "CRM", "Horario"
+				}	
+		));
 		
 	}
 	public void AtualizarTabelaPacientes()
@@ -95,6 +103,13 @@ public class AtendenteGUI extends JFrame {
 			listaStringsPacientes[i++][2] = p.getEndereco();	
 		}
 		
+		tab_paciente.setModel(new DefaultTableModel (
+				
+				listaStringsPacientes,
+				new String[] {
+						"Nome", "CPF", "Endereço"
+				}	
+		));
 	}
 
 	static public AtendenteGUI GetInstance()
@@ -200,7 +215,7 @@ public class AtendenteGUI extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(AtendenteGUI.class.getResource("/Images/inicial_background.png")));
 		panel.add(lblNewLabel);
 		contentPane.setLayout(gl_contentPane);
-		AtualizarTabelaPacientes();
+		
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 242, 676, 420);
@@ -217,16 +232,10 @@ public class AtendenteGUI extends JFrame {
 		tab_paciente = new JTable();
 		scrollPane_1.setViewportView(tab_paciente);
 		
-		tab_paciente.setModel(new DefaultTableModel (
-				
-				listaStringsPacientes,
-				new String[] {
-						"Nome", "CPF", "Endere�o"
-				}	
-		));
+		
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("M�dicos", null, panel_2, null);
+		tabbedPane.addTab("Médicos", null, panel_2, null);
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -264,10 +273,20 @@ public class AtendenteGUI extends JFrame {
 		panel.add(btnVerificarDias);
 		
 		JButton btnCriarEspecialidade = new JButton("Criar Especialidades");
+		btnCriarEspecialidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CriarEspecialidadeGUI ce = new CriarEspecialidadeGUI();
+				ce.setVisible(true);
+				
+			}
+		});
 		btnCriarEspecialidade.setForeground(Color.WHITE);
 		btnCriarEspecialidade.setBackground(new Color(0, 153, 204));
 		btnCriarEspecialidade.setBounds(696, 467, 185, 54);
 		panel.add(btnCriarEspecialidade);
+		
+		AtualizarTabelaPacientes();
+		AtualizarTabelaMedicos();
 			
 	}
 }

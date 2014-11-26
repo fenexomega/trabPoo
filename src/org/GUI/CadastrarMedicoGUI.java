@@ -23,9 +23,13 @@ import javax.swing.border.EmptyBorder;
 
 import org.Classes.Arquivo;
 import org.Classes.Atendente;
+import org.Classes.Especialidade;
 import org.Classes.Medico;
-
 import org.Classes.Paciente;
+import org.Classes.Plano_De_Saude;
+import org.Classes.Usuario;
+import org.GUI.util.ErrorGUI;
+
 import javax.swing.JComboBox;
 
 
@@ -43,6 +47,10 @@ public class CadastrarMedicoGUI extends JDialog {
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
 	private JTextField txtCRM;
+	private JComboBox<String> cmbPlanos;
+	private JComboBox<String> cmbEspecialidade;
+	private JTextField[] textfields;
+	private JCheckBox[] chckbxBoxes;
 
 	/**
 	 * Launch the application.
@@ -71,6 +79,10 @@ public class CadastrarMedicoGUI extends JDialog {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+	
+		chckbxBoxes = new JCheckBox[6];
+		
+		textfields = new JTextField[5];
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -83,7 +95,8 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblUsername.setForeground(new Color(102, 102, 102));
 		
 		txtEndereco = new JTextField();
-
+		
+		
 		txtEndereco.setBounds(148, 294, 349, 29);
 		panel.add(txtEndereco);
 		txtEndereco.setColumns(10);
@@ -176,6 +189,13 @@ public class CadastrarMedicoGUI extends JDialog {
 		chckbxSbado.setBounds(179, 62, 81, 23);
 		panel_1.add(chckbxSbado);
 		
+		chckbxBoxes[0] = chckbxNewCheckBox;
+		chckbxBoxes[1] = chckbxTera;
+		chckbxBoxes[2] = chckbxQuarta;
+		chckbxBoxes[3] = chckbxQuinta;
+		chckbxBoxes[4] = chckbxSexta;
+		chckbxBoxes[5] = chckbxSbado;
+				
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -192,13 +212,45 @@ public class CadastrarMedicoGUI extends JDialog {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				Medico m =  new Medico(null, null, null, null, null, null, null);
+				Medico m =  new Medico(null, null, null, null, null);
+
+				for(int i = 0; i < textfields.length;i++)
+				{
+					if(textfields[i].getText().isEmpty() || pwdPassword.getText().isEmpty())
+					{
+						ErrorGUI.MostrarErro(getContentPane(), "Preencha todo o formulário!");
+						return;
+					}
+				}
+				
+				boolean aux = false;
+				for (int j = 0; j < chckbxBoxes.length; j++)
+				{
+					if(chckbxBoxes[j].isSelected())
+						aux = true;
+				}
+				
+				if(!aux)
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Selecione pelo menos um dia");
+					return;
+				}
+				
+				boolean[] DiasDaSemana = new boolean[6];
+				for (int i = 0; i < chckbxBoxes.length; i++)
+				{
+					DiasDaSemana[i] = chckbxBoxes[i].isSelected();
+				}
+				
+				Usuario u = new Usuario(txtUsername.getText(), pwdPassword.getText());
 				
 				m.setNome(txtNome.getText());
-				m.setUsername(txtUsername.getText());
-				m.setSenha(pwdPassword.getEchoChar());
+				m.setUsuario(u);
 				m.setCRM(txtCRM.getText());
 				m.setTelefone(txtTelefone.getText());
+				m.setEspecialidades(Atendente.getEspecialidadePorString(cmbEspecialidade.getSelectedItem().toString()));
+				m.setDiaDaSemana(DiasDaSemana);
+				
 				
 				if(!Atendente.Cadastrar(m))
 				{
@@ -246,10 +298,6 @@ public class CadastrarMedicoGUI extends JDialog {
 		lblEspecialidade.setFont(new Font("Dialog", Font.PLAIN, 15));
 		lblEspecialidade.setBounds(19, 385, 119, 14);
 		panel.add(lblEspecialidade);
-
-		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.setBounds(148, 380, 89, 23);
-		panel.add(btnAdicionar);
 		
 		JLabel lblPlanosDeSade = new JLabel("Planos de Sa\u00FAde");
 		lblPlanosDeSade.setForeground(new Color(102, 102, 102));
@@ -258,9 +306,31 @@ public class CadastrarMedicoGUI extends JDialog {
 		panel.add(lblPlanosDeSade);
 		
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(373, 383, 112, 20);
-		panel.add(comboBox);
+		cmbPlanos = new JComboBox<String>();
+		cmbPlanos.setBounds(373, 383, 112, 20);
+		panel.add(cmbPlanos);
+		
+		for (Plano_De_Saude plano : Arquivo.getListaPlanos())
+		{
+			cmbPlanos.addItem(plano.getRazaoSocial());
 
+		}
+		
+		cmbEspecialidade = new JComboBox<String>();
+		cmbEspecialidade.setBounds(133, 382, 112, 20);
+		panel.add(cmbEspecialidade);
+		
+		for (Especialidade esp : Arquivo.getListaEspecialidades())
+		{
+			cmbEspecialidade.addItem(esp.getNome());
+			
+		}
+		
+		textfields[0] = txtEndereco;
+		textfields[1] = txtCRM;
+		textfields[2] = txtNome;
+		textfields[3] = txtUsername;
+		textfields[4] = txtTelefone;
+		
 	}
 }

@@ -59,10 +59,12 @@ public class VerificarDiasGUI extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
+
 		panel.setBounds(10, 166, 233, 178);
 		contentPane.add(panel);
 		
 		JCalendar calendar = new JCalendar();
+		calendar.setDecorationBordersVisible(true);
 		panel.add(calendar);
 		
 		JLabel txt3 = new JLabel("10h \u00E0s 11h");
