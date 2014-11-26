@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.util.Calendar;
 import com.toedter.calendar.JCalendar;
+import javax.swing.JCheckBox;
 
 public class AgendarConsultaGUI extends JFrame {
 
@@ -33,7 +34,7 @@ public class AgendarConsultaGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgendarConsultaGUI frame = new AgendarConsultaGUI();
+					AgendarConsultaGUI frame = new AgendarConsultaGUI("111.111.111-11");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +46,7 @@ public class AgendarConsultaGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgendarConsultaGUI() {
+	public AgendarConsultaGUI(String CPFpaciente) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 792, 577);
 		contentPane = new JPanel();
@@ -82,10 +83,6 @@ public class AgendarConsultaGUI extends JFrame {
 		panel_1.setBounds(10, 160, 746, 357);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		
-		TextField textField = new TextField();
-		textField.setBounds(166, 10, 282, 22);
-		panel_1.add(textField);
 		
 		TextField textField_2 = new TextField();
 		textField_2.setBounds(600, 191, 55, 22);
@@ -136,10 +133,6 @@ public class AgendarConsultaGUI extends JFrame {
 		comboBox_1.setBounds(550, 147, 128, 20);
 		panel_1.add(comboBox_1);
 		
-		JRadioButton rdbtnConsultaParticular = new JRadioButton("Consulta particular");
-		rdbtnConsultaParticular.setBounds(550, 57, 168, 23);
-		panel_1.add(rdbtnConsultaParticular);
-		
 		TextField textField_3 = new TextField();
 		textField_3.setBounds(602, 85, 134, 22);
 		panel_1.add(textField_3);
@@ -151,12 +144,8 @@ public class AgendarConsultaGUI extends JFrame {
 		panel_1.add(lblValor);
 		
 		JLabel lblNewLabel = new JLabel("Nome do paciente");
-		lblNewLabel.setBounds(561, 18, 175, 14);
+		lblNewLabel.setBounds(348, 15, 175, 14);
 		panel_1.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(454, 10, 97, 23);
-		panel_1.add(btnNewButton);
 		
 		JLabel lblCpfDoPaciente = new JLabel("CPF do paciente:");
 		lblCpfDoPaciente.setBounds(10, 7, 148, 29);
@@ -172,5 +161,13 @@ public class AgendarConsultaGUI extends JFrame {
 		
 		JCalendar calendar = new JCalendar();
 		panel_2.add(calendar);
+		
+		JLabel lblCpf = new JLabel("cpf");
+		lblCpf.setBounds(170, 15, 70, 15);
+		panel_1.add(lblCpf);
+		
+		JCheckBox chckbxParticular = new JCheckBox("Particular");
+		chckbxParticular.setBounds(550, 56, 129, 23);
+		panel_1.add(chckbxParticular);
 	}
 }

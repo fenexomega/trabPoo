@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -85,11 +84,7 @@ public class MedicoGUI extends JFrame {
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-//		
-//		textField = new JTextField();
-//		textField.setColumns(10);
-//		textField.setBounds(554, 187, 282, 27);
-//		panel.add(textField);
+
 		
 		lblNewLabel_1 = new JLabel(nomeMedico);
 
