@@ -201,6 +201,7 @@ public class AtendenteGUI extends JFrame {
 		panel.add(lblNewLabel);
 		contentPane.setLayout(gl_contentPane);
 		AtualizarTabelaPacientes();
+		AtualizarTabelaMedicos();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 242, 676, 420);
@@ -221,12 +222,12 @@ public class AtendenteGUI extends JFrame {
 				
 				listaStringsPacientes,
 				new String[] {
-						"Nome", "CPF", "Endere�o"
+						"Nome", "CPF", "Endereço"
 				}	
 		));
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("M�dicos", null, panel_2, null);
+		tabbedPane.addTab("Médicos", null, panel_2, null);
 		panel_2.setLayout(null);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();

@@ -28,7 +28,7 @@ public class Arquivo
 	public static void LerArquivos()
 	{
 		System.out.println("Lendo Arquivos");
-		File file = new File(DIR_FILES + "gerentes.ser");
+		File file = new File(DIR_FILES + "usuarios.ser");
 		if(!file.exists())
 			GravarArquivo();
 		listaAtendentes 			= LerArquivoAtendentes();
@@ -122,12 +122,15 @@ public class Arquivo
 	
 	private static ArrayList<Atendente> LerArquivoAtendentes()
 	{
-		ArrayList<Atendente> lista = null;
+		ArrayList<Atendente> lista = new ArrayList<Atendente>();
+
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "atendentes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Atendente>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Atendente>) i;
 			o_In.close();
 			f_In.close();
 
@@ -136,19 +139,20 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Consulta_Particular> LerArquivoConsulta_Particulares()
 	{
-		ArrayList<Consulta_Particular> lista = null;
+		ArrayList<Consulta_Particular> 	lista = new ArrayList<Consulta_Particular>();
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "consultaparticular.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Consulta_Particular>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Consulta_Particular>) i;
 			o_In.close();
 			f_In.close();
 
@@ -157,19 +161,21 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Consulta_Plano> LerArquivoConsulta_Planos()
 	{
-		ArrayList<Consulta_Plano> lista = null;
+		ArrayList<Consulta_Plano> lista = new ArrayList<Consulta_Plano>();
+
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "consultaplano.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Consulta_Plano>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Consulta_Plano>) i;
 			o_In.close();
 			f_In.close();
 
@@ -178,19 +184,21 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Especialidade> LerArquivoEspecialidades()
 	{
-		ArrayList<Especialidade> lista = null;
+		ArrayList<Especialidade> lista = new ArrayList<Especialidade>();
+
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "especialidades.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Especialidade>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Especialidade>) i;
 			o_In.close();
 			f_In.close();
 
@@ -199,19 +207,21 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Gerente> LerArquivoGerentes()
 	{
-		ArrayList<Gerente> lista = null;
+		ArrayList<Gerente> 	lista = new ArrayList<Gerente>();
+;
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "gerentes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Gerente>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Gerente>) i;
 			o_In.close();
 			f_In.close();
 
@@ -220,19 +230,21 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Medico> LerArquivoMedicos()
 	{
-		ArrayList<Medico> lista = null;
+		ArrayList<Medico>	lista = new ArrayList<Medico>();
+
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "medicos.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Medico>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)	
+				lista = (ArrayList<Medico>) i;
 			o_In.close();
 			f_In.close();
 
@@ -241,19 +253,21 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Paciente> LerArquivoPacientes()
 	{
-		ArrayList<Paciente> lista = null;
+		ArrayList<Paciente>	lista = new ArrayList<Paciente>();
+
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "pacientes.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Paciente>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Paciente>) i;
 			o_In.close();
 			f_In.close();
 
@@ -262,20 +276,20 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<Paciente>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Plano_De_Saude> LerArquivoPlano_De_Saudes()
 	{
-		ArrayList<Plano_De_Saude> lista = null;
-		
+		ArrayList<Plano_De_Saude> lista = new ArrayList<Plano_De_Saude>();
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "planos.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Plano_De_Saude>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Plano_De_Saude>) i;
 			o_In.close();
 			f_In.close();
 
@@ -284,19 +298,20 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<Plano_De_Saude>();
 		}
 		return lista;	
 	}
 	
 	private static ArrayList<Usuario> LerArquivoUsuarios()
 	{
-		ArrayList<Usuario> lista = null;
+		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		try
 		{
 			FileInputStream f_In = new FileInputStream(DIR_FILES + "usuarios.ser");
 			ObjectInputStream o_In = new ObjectInputStream(f_In);
-			lista = (ArrayList<Usuario>) o_In.readObject();
+			Object i = o_In.readObject();
+			if(i != null)
+				lista = (ArrayList<Usuario>) i;
 			o_In.close();
 			f_In.close();
 
@@ -305,7 +320,6 @@ public class Arquivo
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
-			lista = new ArrayList<>();
 		}
 		return lista;	
 	}
