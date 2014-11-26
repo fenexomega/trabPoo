@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +31,8 @@ public class AgendarConsultaGUI extends JDialog {
 	private JPanel contentPane;
 	private JLabel lblCpfDoPaciente;
 	private JLabel lblCpf;
+	private TextField textField_3;
+	private JComboBox<Plano_De_Saude> comboBoxPlan;
 	
 	/**
 	 * Launch the application.
@@ -133,7 +137,7 @@ public class AgendarConsultaGUI extends JDialog {
 		lblPlanoDeSade.setBounds(550, 119, 144, 29);
 		panel_1.add(lblPlanoDeSade);
 		
-		JComboBox<Plano_De_Saude> comboBoxPlan = new JComboBox<Plano_De_Saude>();
+		 comboBoxPlan = new JComboBox<Plano_De_Saude>();
 		comboBoxPlan.setBounds(550, 147, 128, 20);
 		panel_1.add(comboBoxPlan);
 		
@@ -142,7 +146,7 @@ public class AgendarConsultaGUI extends JDialog {
 			comboBoxPlan.addItem(plano);
 		}
 		
-		TextField textField_3 = new TextField();
+		textField_3 = new TextField();
 		textField_3.setBounds(602, 85, 134, 22);
 		panel_1.add(textField_3);
 		
@@ -179,5 +183,23 @@ public class AgendarConsultaGUI extends JDialog {
 		JCheckBox chckbxParticular = new JCheckBox("Particular");
 		chckbxParticular.setBounds(550, 56, 129, 23);
 		panel_1.add(chckbxParticular);
+		chckbxParticular.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				// TODO Auto-generated method stub
+				if(e.getStateChange() == ItemEvent.SELECTED)
+				{
+					textField_3.setEnabled(true);
+					comboBoxPlan.setEnabled(false);
+				}
+				else
+				{
+					textField_3.setEnabled(false);
+					comboBoxPlan.setEnabled(true);
+				}
+			}
+		});
 	}
 }

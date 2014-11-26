@@ -1,24 +1,30 @@
 package org.GUI.admin;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
 
-public class CadastrarGerenteGUI extends JFrame {
+import org.Classes.Arquivo;
+import org.Classes.Gerente;
+import org.Classes.Usuario;
+import org.GUI.util.ErrorGUI;
+
+public class CadastrarGerenteGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textField;
-
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +45,8 @@ public class CadastrarGerenteGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarGerenteGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,6 +54,11 @@ public class CadastrarGerenteGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton button = new JButton("Cancelar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		button.setIcon(new ImageIcon(CadastrarGerenteGUI.class.getResource("/Images/cancelar-01.png")));
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(0, 128, 128));
@@ -54,6 +66,44 @@ public class CadastrarGerenteGUI extends JFrame {
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Salvar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(textField.getText().isEmpty() || passwordField.getText().isEmpty())
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Formulário Incompleto");
+					return ;
+				}
+				
+				Usuario u = new Usuario(textField.getText(), passwordField.getText());
+				
+				Arquivo.LerArquivos();
+
+				
+				if(Arquivo.getListaUsuarios().contains(u))
+				{
+					ErrorGUI.MostrarErro(getContentPane(), "Usuário Já registrado");
+					return;
+
+				}
+				
+				
+				Gerente g = new Gerente();
+				g.setUsuario(u);
+				Arquivo.getListaUsuarios().add(u);
+				Arquivo.getListaGerente().add(g);
+				
+				Arquivo.GravarArquivo();
+				
+				ErrorGUI.MostrarErro(getContentPane(), "Usuário Cadastrado com Sucesso");
+				
+				dispose();
+				
+				return;
+
+				
+				
+			}
+		});
 		button_1.setIcon(new ImageIcon(CadastrarGerenteGUI.class.getResource("/Images/salvar-01.png")));
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));

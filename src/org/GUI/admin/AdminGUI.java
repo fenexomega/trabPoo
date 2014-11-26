@@ -11,6 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import org.GUI.GerenteGUI;
+
 public class AdminGUI extends JFrame
 {
 
@@ -73,6 +75,8 @@ public class AdminGUI extends JFrame
 		JButton btnCadastrarGerente = new JButton("Cadastrar Gerente");
 		btnCadastrarGerente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CadastrarGerenteGUI gui = new CadastrarGerenteGUI();
+				gui.setVisible(true);
 			}
 		});
 		btnCadastrarGerente.setForeground(new Color(255, 255, 255));
