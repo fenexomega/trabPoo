@@ -100,8 +100,12 @@ public class MedicoGUI extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
 				LoginGUI lg = new LoginGUI();
-				lg.setVisible(true);
-				dispose();
+				int opcao;
+				opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?","", JOptionPane.YES_NO_OPTION);
+				if(opcao == JOptionPane.YES_OPTION){
+					lg.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnNewButton.setBackground(SystemColor.desktop);

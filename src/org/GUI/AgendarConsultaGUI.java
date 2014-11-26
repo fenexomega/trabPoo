@@ -18,17 +18,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import org.Classes.Arquivo;
 import org.Classes.Plano_De_Saude;
 
 import com.toedter.calendar.JCalendar;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 public class AgendarConsultaGUI extends JDialog {
 
 	private JPanel contentPane;
 	private JLabel lblCpfDoPaciente;
 	private JLabel lblCpf;
+	private JTable table;
+	private String[][] listaStringsMedicos;
 	
 	/**
 	 * Launch the application.
@@ -51,7 +57,7 @@ public class AgendarConsultaGUI extends JDialog {
 	 */
 	public AgendarConsultaGUI(String CPFpaciente) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 792, 577);
+		setBounds(100, 100, 792, 651);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,35 +90,35 @@ public class AgendarConsultaGUI extends JDialog {
 		panel.add(label);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 160, 746, 357);
+		panel_1.setBounds(10, 160, 746, 431);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		TextField textField_2 = new TextField();
-		textField_2.setBounds(600, 191, 55, 22);
+		textField_2.setBounds(80, 381, 55, 22);
 		panel_1.add(textField_2);
 		
 		JLabel lblHora = new JLabel("Hora:");
 		lblHora.setForeground(Color.GRAY);
 		lblHora.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
-		lblHora.setBounds(550, 184, 55, 29);
+		lblHora.setBounds(30, 374, 55, 29);
 		panel_1.add(lblHora);
 		
-		JLabel lblMdicos = new JLabel("M\u00E9dicos");
-		lblMdicos.setBounds(30, 271, 128, 29);
+		JLabel lblMdicos = new JLabel("Especialidades");
+		lblMdicos.setBounds(314, 49, 148, 29);
 		panel_1.add(lblMdicos);
 		lblMdicos.setForeground(Color.GRAY);
 		lblMdicos.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
 		
 		JComboBox<?> comboBoxMedi = new JComboBox<Object>();
-		comboBoxMedi.setBounds(30, 299, 128, 20);
+		comboBoxMedi.setBounds(314, 77, 128, 20);
 		panel_1.add(comboBoxMedi);
 		
 		JButton button_1 = new JButton("Salvar");
 		button_1.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/salvar-01.png")));
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(0, 128, 128));
-		button_1.setBounds(438, 303, 144, 43);
+		button_1.setBounds(438, 344, 144, 43);
 		panel_1.add(button_1);
 		
 		JButton button_2 = new JButton("Cancelar");
@@ -124,18 +130,20 @@ public class AgendarConsultaGUI extends JDialog {
 		button_2.setIcon(new ImageIcon(AgendarConsultaGUI.class.getResource("/Images/cancelar-01.png")));
 		button_2.setForeground(Color.WHITE);
 		button_2.setBackground(new Color(0, 128, 128));
-		button_2.setBounds(592, 303, 144, 43);
+		button_2.setBounds(592, 344, 144, 43);
 		panel_1.add(button_2);
 		
 		JLabel lblPlanoDeSade = new JLabel("Plano de sa\u00FAde");
 		lblPlanoDeSade.setForeground(Color.GRAY);
 		lblPlanoDeSade.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
-		lblPlanoDeSade.setBounds(550, 119, 144, 29);
+		lblPlanoDeSade.setBounds(30, 309, 144, 29);
 		panel_1.add(lblPlanoDeSade);
 		
 		JComboBox<Plano_De_Saude> comboBoxPlan = new JComboBox<Plano_De_Saude>();
-		comboBoxPlan.setBounds(550, 147, 128, 20);
+		comboBoxPlan.setBounds(30, 337, 128, 20);
 		panel_1.add(comboBoxPlan);
+		
+		Arquivo.LerArquivos();
 		
 		for (Plano_De_Saude plano : Arquivo.getListaPlanos())
 		{
@@ -143,13 +151,13 @@ public class AgendarConsultaGUI extends JDialog {
 		}
 		
 		TextField textField_3 = new TextField();
-		textField_3.setBounds(602, 85, 134, 22);
+		textField_3.setBounds(82, 275, 134, 22);
 		panel_1.add(textField_3);
 		
 		JLabel lblValor = new JLabel("Valor:");
 		lblValor.setForeground(Color.GRAY);
 		lblValor.setFont(new Font("Helvetica65-Medium", Font.PLAIN, 18));
-		lblValor.setBounds(550, 78, 55, 29);
+		lblValor.setBounds(30, 268, 55, 29);
 		panel_1.add(lblValor);
 		
 		
@@ -168,7 +176,7 @@ public class AgendarConsultaGUI extends JDialog {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2.setBounds(20, 67, 227, 193);
+		panel_2.setBounds(20, 47, 227, 193);
 		panel_1.add(panel_2);
 		
 		JCalendar calendar = new JCalendar();
@@ -177,7 +185,27 @@ public class AgendarConsultaGUI extends JDialog {
 
 		
 		JCheckBox chckbxParticular = new JCheckBox("Particular");
-		chckbxParticular.setBounds(550, 56, 129, 23);
+		chckbxParticular.setBounds(30, 246, 129, 23);
 		panel_1.add(chckbxParticular);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(452, 49, 284, 248);
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 264, 226);
+		panel_3.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		table.setModel(new DefaultTableModel (
+				
+				listaStringsMedicos,
+				new String[] {
+						"Nome", "Horario"
+				}	
+		));
 	}
 }
