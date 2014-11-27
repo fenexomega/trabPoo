@@ -22,9 +22,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import org.Classes.*;
-
-import java.lang.String;
+import org.Classes.Arquivo;
+import org.Classes.Atendente;
+import org.Classes.Consulta;
+import org.Classes.Paciente;
+import org.GUI.util.ErrorGUI;
 
 public class MedicoGUI extends JFrame {
 
@@ -201,6 +203,7 @@ public class MedicoGUI extends JFrame {
 				}	
 		));
 		
+
 		tablePacientes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	            // do some actions here, for example
